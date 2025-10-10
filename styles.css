@@ -194,8 +194,7 @@ main {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  grid-auto-rows: 1fr;
-  align-items: stretch;
+  align-items: start;
 }
 
 .suggestion-card {
@@ -209,6 +208,7 @@ main {
   gap: 1rem;
   height: 100%;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
 }
 
 .suggestion-card:hover,
@@ -225,6 +225,7 @@ main {
   display: grid;
   place-items: center;
   min-height: 240px;
+  width: 100%;
 }
 
 .suggestion-card[data-suggestion-type="game"] .suggestion-card__media {
@@ -249,6 +250,7 @@ main {
   display: grid;
   gap: 0.75rem;
   align-content: start;
+  min-width: 0;
 }
 
 .suggestion-card__body h3 {
@@ -288,7 +290,7 @@ main {
 
 @media (min-width: 768px) {
   .suggestion-card {
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1fr);
     grid-template-rows: 1fr;
     align-items: stretch;
   }
