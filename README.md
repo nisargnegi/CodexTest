@@ -1,6 +1,6 @@
 # Long-Distance Date Night Invite
 
-A single-page website that invites your long-distance girlfriend to pick between a movie night or a co-op gaming night. It uses the free [Sample APIs](https://sampleapis.com/) movie and Xbox datasets to surface light thriller, comedy, romcom, and mystery suggestions, and gracefully falls back to handpicked favorites if the API is unavailable.
+A single-page website that invites your long-distance girlfriend, Saanu, to pick between a movie night or a co-op gaming night with you (Aloo). It uses the free [Sample APIs](https://sampleapis.com/) movie and Xbox datasets to surface light thriller, comedy, romcom, and mystery suggestions, and gracefully falls back to handpicked favorites if the API is unavailable.
 
 ## Getting started locally
 
@@ -31,9 +31,10 @@ there so the browser will allow the fetch requests.
 Once the page is open in your browser:
 
 1. Click the **Movie Night** pill button (the left option) to load three streaming ideas and confirm the refresh button appears.
-2. Click **Show me different ideas** to ensure a new trio of options loads.
-3. Click the **Co-op Game Night** pill button to swap the copy, cards, and after-date description for gaming suggestions.
-4. Optionally toggle between the two choices a few times to make sure the content updates smoothly without needing a refresh.
+2. Use the genre chips (Surprise mix, Romcom glow, Comedy night, Mystery & sleuthing, Gentle thrills) to filter the movie picks and confirm each one refetches suggestions.
+3. Click **Show me different ideas** to ensure a new trio of options loads for the active genre.
+4. Click the **Co-op Game Night** pill button to swap the copy, cards, and after-date description for gaming suggestions.
+5. Optionally toggle between the two choices a few times to make sure the content updates smoothly without needing a refresh.
 
 These steps are exactly what a visitor will do, so running through them verifies both the layout and the API/fallback logic.
 
@@ -63,7 +64,8 @@ These providers include free HTTPS certificates and let you add a custom domain 
 ## Customizing the experience
 
 - Update the opening message in `index.html` to personalize the invitation even more.
-- Edit the `FALLBACK_SUGGESTIONS` arrays in `script.js` to include inside jokes or personal favorites.
+- Adjust the `MOVIE_GENRES` object in `script.js` to tweak the genre labels, API endpoints, loading copy, and fallbacks for each vibe.
+- Edit the `GAME_CONFIG.fallback` list if you have favorite cross-play titles beyond the defaults.
 - Adjust styling tokens in `styles.css` to match your shared aesthetic or add your photos as backgrounds.
 
 ## APIs used
