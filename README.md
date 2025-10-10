@@ -51,6 +51,8 @@ These steps are exactly what a visitor will do, so running through them verifies
 
 GitHub Pages will automatically redeploy every time you push an update, making it a zero-cost way to keep the invite fresh.
 
+> **Tip for seeing new changes immediately:** Browsers can aggressively cache `styles.css` and `script.js`. Any time you push larger updates, bump the version query in `index.html` (for example, change `?v=2` to `?v=3`) so Pages serves the newest files without requiring visitors to hard-refresh.
+
 ### Other free static hosting options
 
 If you prefer a drag-and-drop flow, services like [Netlify Drop](https://app.netlify.com/drop) and [Vercel](https://vercel.com/) also host static sites for free:
