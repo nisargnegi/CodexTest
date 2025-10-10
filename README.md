@@ -37,12 +37,7 @@ Once the page is open in your browser:
 
 These steps are exactly what a visitor will do, so running through them verifies both the layout and the API/fallback logic.
 
-## Deploying to GitHub Pages
 
-1. Commit the contents of this repository to your GitHub repository's `main` (or `master`) branch.
-2. Push to GitHub and open the repository settings.
-3. Under **Pages**, choose the `main` branch with the `/ (root)` folder as the publishing source.
-4. Save. GitHub Pages will serve `index.html` automatically at `https://<your-username>.github.io/<repository-name>/`.
 
 ## Customizing the experience
 
