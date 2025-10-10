@@ -9,14 +9,15 @@ const refreshButton = document.getElementById("refresh-button");
 
 const SUGGESTION_COUNT = 6;
 const MOVIE_API_BASE = "https://api.sampleapis.com/movies";
+const IMAGE_PROXY_PREFIX = "https://images.weserv.nl/?url=";
 
 const MOVIE_GENRES = [
   {
-    id: "romance",
-    label: "Romance",
+    id: "action-adventure",
+    label: "Action & Adventure",
     description:
-      "Sweet, heart-tugging romcoms so we can laugh, swoon, and swap favorite lines after the credits.",
-    loadingCopy: "Setting the mood with the dreamiest picks…",
+      "Big set pieces and bold escapes when we want our long-distance date to feel like a blockbuster team-up.",
+    loadingCopy: "Packing our virtual go-bag with daring picks…",
   },
   {
     id: "animation",
@@ -68,8 +69,8 @@ const MOVIE_GENRES = [
     loadingCopy: "Following the clues…",
   },
   {
-    id: "scifi",
-    label: "Sci‑Fi",
+    id: "scifi-fantasy",
+    label: "Sci‑Fi & Fantasy",
     description:
       "Portal-hopping stories that feed our imagination and give us worlds to explore side by side.",
     loadingCopy: "Charting far-away realms…",
@@ -153,6 +154,34 @@ const GAME_LIBRARY = [
 let currentMode = null;
 let activeGenreId = MOVIE_GENRES[0].id;
 
+function sanitizePosterUrl(rawUrl) {
+  if (typeof rawUrl !== "string") return null;
+
+  let url = rawUrl.trim();
+
+  if (!url || url === "N/A") return null;
+
+  if (url.startsWith("//")) {
+    return `https:${url}`;
+  }
+
+  if (url.startsWith("http://")) {
+    const withoutProtocol = url.slice("http://".length);
+    return `${IMAGE_PROXY_PREFIX}${encodeURIComponent(withoutProtocol)}`;
+  }
+
+  return url;
+}
+
+function getPosterUrl(item) {
+  const candidates = [item?.posterURL, item?.posterUrl, item?.poster];
+  for (const candidate of candidates) {
+    const sanitized = sanitizePosterUrl(candidate);
+    if (sanitized) return sanitized;
+  }
+  return null;
+}
+
 function pickRandomItems(items, count) {
   const pool = [...items];
   const selection = [];
@@ -233,14 +262,7 @@ async function loadMovieSuggestions() {
     }
 
     const data = await response.json();
-    const cleaned = data.filter((item) => {
-      if (!item?.title) return false;
-
-      const poster = item?.posterURL || item?.posterUrl || item?.poster;
-      if (!poster || poster === "N/A") return false;
-
-      return true;
-    });
+    const cleaned = data.filter((item) => item?.title && getPosterUrl(item));
 
     const selection = pickRandomItems(cleaned, SUGGESTION_COUNT);
 
@@ -265,7 +287,7 @@ async function loadMovieSuggestions() {
       media.className = "suggestion-card__media";
       const image = document.createElement("img");
       image.loading = "lazy";
-      image.src = item.posterURL || item.posterUrl || item.poster;
+      image.src = getPosterUrl(item);
       image.alt = `${item.title} poster`;
       media.appendChild(image);
 

@@ -31,7 +31,7 @@ there so the browser will allow the fetch requests.
 Once the page is open in your browser:
 
 1. Click the **Movie Night** pill button (the left option) to load six streaming ideas, confirm the refresh button appears, and verify that each card displays an image and summary.
-2. Use the genre chips (Romance, Animation, Classic, Comedy, Drama, Family, Horror, Mystery, Sci‑Fi, Western) to filter the movie picks and confirm each one refetches suggestions straight from the matching API endpoint.
+2. Use the genre chips (Action & Adventure, Animation, Classic, Comedy, Drama, Family, Horror, Mystery, Sci‑Fi & Fantasy, Western) to filter the movie picks and confirm each one refetches suggestions straight from the matching API endpoint.
 3. Click **Show me different ideas** to ensure a fresh set of six options loads for the active genre.
 4. Click the **Co-op Game Night** pill button to swap the copy, cards, and after-date description for gaming suggestions. Confirm the genre chips disappear in game mode, each card lists the cross-play hookup tip, and every suggestion shows the refreshed co-op artwork.
 5. Press **Show me different ideas** in either mode a few times to see the rotating set of six picks — the selector now advances through the expanded library instead of repeating the same cards.
@@ -73,12 +73,14 @@ These providers include free HTTPS certificates and let you add a custom domain 
 
 ## APIs used
 
-- **Movies:** `https://api.sampleapis.com/movies/<genre>` (romance, animation, classic, comedy, drama, family, horror, mystery, scifi, western)
+- **Movies:** `https://api.sampleapis.com/movies/<genre>` (action-adventure, animation, classic, comedy, drama, family, horror, mystery, scifi-fantasy, western)
 - **Games:** Curated Xbox ↔ Windows cross-play list maintained in `script.js` (no external game API is required).
+- **Poster proxy:** Some Sample APIs entries still reference `http://` poster URLs. The page automatically routes those through [images.weserv.nl](https://images.weserv.nl/) so the artwork loads securely over HTTPS on GitHub Pages.
 
 ## FAQ
 
 - **Why do the movie genres stop at ten chips?** The Sample APIs movie service exposes exactly those ten genre endpoints. Keeping the list in sync ensures every button maps to a working API route.
 - **What happens if the movie API is down?** The grid will show an error message and invite you to try again or pick another genre. No offline fallback cards are stored, so every result you see comes directly from the live API.
 - **Where do the game suggestions come from?** They're curated manually to guarantee Xbox ↔ Windows cross-play support. Feel free to replace or extend the list in `GAME_LIBRARY` with your own favorites.
+- **Why did some posters used to render as empty boxes?** A few titles only provide `http://` artwork URLs, which browsers block on the secure GitHub Pages domain. By proxying those images through an HTTPS CDN, the cards now load their cover art without triggering mixed-content errors.
 
