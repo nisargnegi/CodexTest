@@ -395,6 +395,9 @@ async function loadSuggestions(choice, { genre = "any", resetCache = false } = {
   suggestionsDescription.textContent = loadingCopy;
   suggestionsGrid.innerHTML = "";
   refreshButton.hidden = true;
+  if (!refreshButton.hasAttribute("hidden")) {
+    refreshButton.setAttribute("hidden", "");
+  }
 
   try {
     const items = await fetchSuggestions(choice, { genre });
@@ -403,6 +406,7 @@ async function loadSuggestions(choice, { genre = "any", resetCache = false } = {
       ? MOVIE_GENRES[genre]?.description || MOVIE_GENRES.any.description
       : GAME_CONFIG.description;
     refreshButton.hidden = false;
+    refreshButton.removeAttribute("hidden");
     refreshButton.dataset.choice = choice;
     if (isMovie) {
       refreshButton.dataset.genre = genre;
@@ -419,6 +423,7 @@ async function loadSuggestions(choice, { genre = "any", resetCache = false } = {
 function showGenrePicker() {
   if (!genrePicker) return;
   genrePicker.hidden = false;
+  genrePicker.removeAttribute("hidden");
 
   if (genrePicker.childElementCount === 0) {
     Object.entries(MOVIE_GENRES).forEach(([key, config]) => {
@@ -447,6 +452,9 @@ function showGenrePicker() {
 function hideGenrePicker() {
   if (!genrePicker) return;
   genrePicker.hidden = true;
+  if (!genrePicker.hasAttribute("hidden")) {
+    genrePicker.setAttribute("hidden", "");
+  }
 }
 
 async function handleChoice(choice) {
@@ -467,6 +475,7 @@ async function handleChoice(choice) {
   }
 
   suggestionsSection.hidden = false;
+  suggestionsSection.removeAttribute("hidden");
 
   const genre = choice === "movie" ? state.genre : undefined;
   await loadSuggestions(choice, { genre });
