@@ -226,12 +226,15 @@ main {
   place-items: center;
   min-height: 240px;
   width: 100%;
+  max-width: 320px;
+  justify-self: center;
 }
 
 .suggestion-card[data-suggestion-type="game"] .suggestion-card__media {
   aspect-ratio: 16 / 9;
   min-height: 200px;
   background: rgba(15, 23, 42, 0.12);
+  max-width: 100%;
 }
 
 .suggestion-card__media img {
@@ -290,7 +293,7 @@ main {
 
 @media (min-width: 768px) {
   .suggestion-card {
-    grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1fr);
+    grid-template-columns: minmax(240px, 260px) minmax(0, 1fr);
     grid-template-rows: 1fr;
     align-items: stretch;
   }
@@ -298,6 +301,9 @@ main {
   .suggestion-card__media {
     aspect-ratio: unset;
     min-height: 100%;
+    max-width: 260px;
+    width: 100%;
+    align-self: stretch;
   }
 }
 

@@ -657,6 +657,28 @@ function createGameArt(
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
+function resolveImage(item, type) {
+  const candidates = [
+    item?.image,
+    item?.posterURL,
+    item?.posterUrl,
+    item?.poster,
+    item?.img,
+    item?.imageUrl,
+    item?.cover,
+    item?.coverImage,
+  ];
+
+  for (const value of candidates) {
+    if (!value) continue;
+    const normalized = `${value}`.trim();
+    if (!normalized || normalized.toLowerCase() === "n/a") continue;
+    return normalized;
+  }
+
+  return getPlaceholderImage(item?.title || item?.name, type);
+}
+
 function mapToSuggestion(item, fallbackLabel, choice) {
   const title =
     item?.title ||
@@ -700,16 +722,7 @@ function mapToSuggestion(item, fallbackLabel, choice) {
       : null);
 
   const type = choice === "game" ? "game" : "movie";
-  const image =
-    item?.image ||
-    item?.posterURL ||
-    item?.posterUrl ||
-    item?.poster ||
-    item?.img ||
-    item?.imageUrl ||
-    item?.cover ||
-    item?.coverImage ||
-    getPlaceholderImage(title, type);
+  const image = resolveImage(item, type) || getPlaceholderImage(title, type);
 
   return { title, summary, reason, note, image, type };
 }
