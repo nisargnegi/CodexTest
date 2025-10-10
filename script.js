@@ -396,10 +396,11 @@ const CROSSPLAY_GAMES = [
     reason:
       "Turbo-charge our date night with car soccer chaos — perfect for cheering every goal in party chat.",
     note: "Cross-play: Enable it in Settings → Gameplay, then create a private match with a shared name & password.",
+    aliases: ["Rocket League®"],
     image: createGameArt("Rocket League", {
       background: "#fb7185",
       accent: "#be123c",
-      emoji: "⚽️",
+      emoji: "🚗",
     }),
   },
   {
@@ -409,6 +410,7 @@ const CROSSPLAY_GAMES = [
     reason:
       "Set sail as a pirate duo, solve riddles, and clink grog mugs while steering the same ship across the waves.",
     note: "Cross-play: Invite via the Xbox companion app or Xbox Game Bar to drop into the same crew.",
+    aliases: ["Sea of Thieves: 2023 Edition"],
     image: createGameArt("Sea of Thieves", {
       background: "#0f766e",
       accent: "#115e59",
@@ -422,10 +424,11 @@ const CROSSPLAY_GAMES = [
     reason:
       "Dive into dungeon-crawling co-op, share loot, and plan our next enchantments together in real time.",
     note: "Cross-play: Sign in with Microsoft accounts on both sides, then use the in-game friends tab to invite.",
+    aliases: ["Minecraft Dungeons - Ultimate"],
     image: createGameArt("Minecraft Dungeons", {
       background: "#ea580c",
       accent: "#c2410c",
-      emoji: "🛡️",
+      emoji: "🗡️",
     }),
   },
   {
@@ -435,6 +438,7 @@ const CROSSPLAY_GAMES = [
     reason:
       "Coordinate our kitchen like pros, yell playful orders, and laugh when the onion soup inevitably catches fire.",
     note: "Cross-play: Host an online session and turn on cross-platform play from the main menu options.",
+    aliases: ["Overcooked 2"],
     image: createGameArt("Overcooked! 2", {
       background: "#f97316",
       accent: "#facc15",
@@ -448,10 +452,95 @@ const CROSSPLAY_GAMES = [
     reason:
       "Race through obstacle courses as a matching duo and celebrate every crown-worthy near miss together.",
     note: "Cross-play: Add each other using Epic display names, then squad up from the inviting player's party screen.",
+    aliases: ["Fall Guys: Free for All"],
     image: createGameArt("Fall Guys", {
       background: "#ec4899",
       accent: "#9333ea",
       emoji: "👑",
+    }),
+  },
+  {
+    title: "Deep Rock Galactic",
+    summary:
+      "Procedurally generated caverns, space dwarves, and endless co-op mining missions filled with glowing loot.",
+    reason:
+      "Let's grab our drills, shout 'Rock and Stone,' and carve a new path shoulder-to-shoulder underground.",
+    note: "Cross-play: Join through Xbox/Microsoft accounts — Steam players can use cross-play via the Xbox app on PC.",
+    aliases: ["Deep Rock", "Deep Rock Galactic®"],
+    image: createGameArt("Deep Rock Galactic", {
+      background: "#1e293b",
+      accent: "#0f766e",
+      emoji: "⛏️",
+    }),
+  },
+  {
+    title: "Splitgate",
+    summary:
+      "Fast-paced arena shooter where portal tricks meet headshots in neon sci-fi stadiums.",
+    reason:
+      "Perfect for showing off our sneaky portal plays and snappy comms as a cross-play duo.",
+    note: "Cross-play: Link accounts inside the Splitgate menu and invite directly from the in-game friends list.",
+    aliases: ["Splitgate: Arena Warfare", "Splitgate (Beta)", "Split Fiction"],
+    image: createGameArt("Splitgate", {
+      background: "#7c3aed",
+      accent: "#312e81",
+      emoji: "🌀",
+    }),
+  },
+  {
+    title: "Forza Horizon 5",
+    summary:
+      "Open-world racing across vibrant Mexico with convoys, expeditions, and seasonal challenges.",
+    reason:
+      "Cruise the coast, race dune buggies, and snap photo mode memories while sharing the same convoy.",
+    note: "Cross-play: Invite via convoy from the pause menu — Xbox and PC drivers share the same festival servers.",
+    aliases: ["Forza Horizon 5 Premium"],
+    image: createGameArt("Forza Horizon 5", {
+      background: "#f97316",
+      accent: "#ef4444",
+      emoji: "🏎️",
+    }),
+  },
+  {
+    title: "Halo Infinite",
+    summary:
+      "Arena and Big Team Battle modes with classic Halo gunplay, grappleshots, and story co-op missions.",
+    reason:
+      "Tag-team the campaign or jump into multiplayer playlists — our comms make every victory sweeter.",
+    note: "Cross-play: Fireteam up from the in-game roster; Xbox, Steam, and Windows players share matchmaking.",
+    aliases: ["Halo Infinite (Campaign)", "Halo Infinite Multiplayer"],
+    image: createGameArt("Halo Infinite", {
+      background: "#1f2937",
+      accent: "#0ea5e9",
+      emoji: "⚔️",
+    }),
+  },
+  {
+    title: "Grounded",
+    summary:
+      "Honey I Shrunk the Kids survival fun with backyard base building, giant insects, and story quests.",
+    reason:
+      "We'll build cozy forts out of clover leaves and fend off spiders together like the tiniest power couple.",
+    note: "Cross-play: Host a shared world from Xbox or PC and invite using Xbox Live gamertags.",
+    aliases: ["Grounded (Game Preview)"],
+    image: createGameArt("Grounded", {
+      background: "#65a30d",
+      accent: "#15803d",
+      emoji: "🐜",
+    }),
+  },
+  {
+    title: "Destiny 2",
+    summary:
+      "Space fantasy looter-shooter with co-op strikes, seasonal stories, and cinematic raids.",
+    reason:
+      "Run strikes, tackle seasonal quests, or just vibe in the Tower while we compare new gear rolls.",
+    note: "Cross-play: Enable Bungie cross-save and use the roster screen to invite across Xbox and PC.",
+    aliases: ["Destiny 2: Lightfall", "Destiny 2 (Free-to-Play)"],
+    image: createGameArt("Destiny 2", {
+      background: "#312e81",
+      accent: "#9333ea",
+      emoji: "🛰️",
     }),
   },
 ];
@@ -471,7 +560,8 @@ const state = {
   genre: "any",
 };
 
-const cache = new Map();
+const datasetCache = new Map();
+const rotationState = new Map();
 
 const CROSSPLAY_LOOKUP = CROSSPLAY_GAMES.reduce((map, game) => {
   const names = [game.title, ...(game.aliases || [])];
@@ -497,66 +587,6 @@ function shuffle(array) {
     [clone[i], clone[j]] = [clone[j], clone[i]];
   }
   return clone;
-}
-
-function buildSuggestionList({
-  choice,
-  genre = "any",
-  primaryItems = [],
-  fallbackItems = [],
-  amount = SUGGESTION_COUNT,
-}) {
-  const fallbackLabel = choice === "movie" ? MOVIE_GENRES[genre]?.label : undefined;
-  const suggestions = [];
-  const seenTitles = new Set();
-  let fallbackUsed = false;
-
-  function tryAdd(item, useFallback = false) {
-    if (!item) return;
-    const suggestion = mapToSuggestion(item, fallbackLabel, choice);
-    const key = normalizeTitleKey(suggestion.title);
-    if (!key || seenTitles.has(key)) {
-      return;
-    }
-    seenTitles.add(key);
-    if (useFallback) {
-      fallbackUsed = true;
-    }
-    suggestions.push(suggestion);
-  }
-
-  shuffle(primaryItems).some((item) => {
-    tryAdd(item, false);
-    return suggestions.length >= amount;
-  });
-
-  if (suggestions.length < amount) {
-    shuffle(fallbackItems).some((item) => {
-      tryAdd(item, true);
-      return suggestions.length >= amount;
-    });
-  }
-
-  if (suggestions.length === 0) {
-    tryAdd(
-      {
-        title:
-          fallbackLabel || (choice === "movie" ? "Movie night standby" : "Game night standby"),
-        summary: "Saving a special spot on our list while the API catches up.",
-        reason:
-          choice === "movie"
-            ? "Let's treat this as a rain check and refresh for fresh picks together."
-            : "Hit refresh for new quests or pick from our cross-play library anytime.",
-        image: getPlaceholderImage(
-          fallbackLabel || (choice === "movie" ? "Movie" : "Game"),
-          choice === "game" ? "game" : "movie"
-        ),
-      },
-      true
-    );
-  }
-
-  return { suggestions, fallbackUsed };
 }
 
 function normalizeGenres(genre) {
@@ -604,18 +634,23 @@ function createGameArt(
   const safeTitle = escapeForSvg(title || "Game night");
   const safeEmoji = escapeForSvg(emoji || "🎮");
   const svg = `<?xml version="1.0" encoding="UTF-8"?>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
       <defs>
         <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
           <stop offset="0%" stop-color="${background}" />
           <stop offset="100%" stop-color="${accent}" />
         </linearGradient>
+        <radialGradient id="glow" cx="50%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="rgba(255, 255, 255, 0.35)" />
+          <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
+        </radialGradient>
       </defs>
-      <rect fill="url(#grad)" width="400" height="225" rx="28" />
-      <g font-family="'Quicksand', 'Segoe UI', sans-serif" fill="#ffffff">
-        <text x="32" y="92" font-size="56" opacity="0.85">${safeEmoji}</text>
-        <text x="32" y="148" font-size="32" font-weight="700">${safeTitle}</text>
-        <text x="32" y="182" font-size="16" opacity="0.75">Xbox ↔ PC co-op ready</text>
+      <rect fill="url(#grad)" width="640" height="360" rx="32" />
+      <rect fill="url(#glow)" width="640" height="360" rx="32" />
+      <g font-family="'Quicksand', 'Segoe UI', sans-serif" fill="#ffffff" text-anchor="middle">
+        <text x="320" y="188" font-size="132" opacity="0.9">${safeEmoji}</text>
+        <text x="320" y="272" font-size="44" font-weight="700">${safeTitle}</text>
+        <text x="320" y="314" font-size="22" opacity="0.8">Xbox ↔ PC co-op ready</text>
       </g>
     </svg>`;
 
@@ -745,24 +780,32 @@ function filterGames(items = []) {
     }
   });
 
-  const curatedExtras = CROSSPLAY_GAMES.filter((game) => !matches.has(game.title));
-  return [...matches.values(), ...curatedExtras];
+  return [...matches.values()];
 }
 
-async function fetchSuggestions(choice, { genre = "any" } = {}) {
+async function prepareDataset(choice, { genre = "any", reset = false } = {}) {
   const cacheKey = getCacheKey(choice, { genre });
-  if (cache.has(cacheKey)) {
-    return cache.get(cacheKey);
+  if (reset) {
+    datasetCache.delete(cacheKey);
+    rotationState.delete(cacheKey);
+  }
+
+  if (datasetCache.has(cacheKey)) {
+    return datasetCache.get(cacheKey);
   }
 
   const endpoints =
     choice === "movie"
       ? MOVIE_GENRES[genre]?.endpoints || MOVIE_GENRES.any.endpoints
       : GAME_CONFIG.endpoints;
-  const fallbackItems =
+  const fallbackSource =
     choice === "movie"
       ? MOVIE_GENRES[genre]?.fallback || MOVIE_GENRES.any.fallback
       : GAME_CONFIG.fallback;
+
+  let primaryItems = [];
+  let fallbackItems = [];
+  let fallbackOnly = true;
 
   try {
     const results = await Promise.all(
@@ -776,39 +819,146 @@ async function fetchSuggestions(choice, { genre = "any" } = {}) {
     );
 
     const flattened = results.flat();
-    if (!Array.isArray(flattened) || flattened.length === 0) {
-      throw new Error("No results returned");
+    if (Array.isArray(flattened) && flattened.length > 0) {
+      const filtered =
+        choice === "movie"
+          ? filterMovies(flattened, genre)
+          : filterGames(flattened);
+
+      if (filtered.length > 0) {
+        primaryItems = shuffle(filtered);
+        fallbackOnly = false;
+      }
     }
-
-    const filtered =
-      choice === "movie"
-        ? filterMovies(flattened, genre)
-        : filterGames(flattened);
-
-    const { suggestions, fallbackUsed } = buildSuggestionList({
-      choice,
-      genre,
-      primaryItems: filtered,
-      fallbackItems,
-      amount: SUGGESTION_COUNT,
-    });
-
-    const payload = { items: suggestions, fallbackUsed };
-    cache.set(cacheKey, payload);
-    return payload;
   } catch (error) {
     console.warn("Falling back to offline suggestions", error);
-    const { suggestions } = buildSuggestionList({
-      choice,
-      genre,
-      primaryItems: [],
-      fallbackItems,
-      amount: SUGGESTION_COUNT,
-    });
-    const payload = { items: suggestions, fallbackUsed: true };
-    cache.set(cacheKey, payload);
-    return payload;
   }
+
+  if (choice === "movie") {
+    fallbackItems = shuffle([...(fallbackSource || [])]);
+  } else {
+    const usedKeys = new Set(
+      primaryItems.map((item) => normalizeTitleKey(item?.title || item?.name))
+    );
+    const curatedPool = GAME_CONFIG.fallback.filter(
+      (game) => !usedKeys.has(normalizeTitleKey(game.title))
+    );
+    const basePool = curatedPool.length > 0 ? curatedPool : GAME_CONFIG.fallback;
+    fallbackItems = shuffle([...basePool]);
+    if (primaryItems.length === 0) {
+      fallbackOnly = true;
+    }
+  }
+
+  const dataset = { primaryItems, fallbackItems, fallbackOnly };
+  datasetCache.set(cacheKey, dataset);
+  return dataset;
+}
+
+function selectSuggestions(choice, { genre = "any" } = {}, dataset) {
+  const amount = SUGGESTION_COUNT;
+  const fallbackLabel = choice === "movie" ? MOVIE_GENRES[genre]?.label : undefined;
+  const suggestions = [];
+  const seenTitles = new Set();
+  let fallbackUsed = dataset?.fallbackOnly ?? false;
+
+  const rotationKey = getCacheKey(choice, { genre });
+  const primaryItems = Array.isArray(dataset?.primaryItems)
+    ? dataset.primaryItems
+    : [];
+  const fallbackItems = Array.isArray(dataset?.fallbackItems)
+    ? dataset.fallbackItems
+    : [];
+
+  let state = rotationState.get(rotationKey);
+  if (!state) {
+    state = {
+      primaryIndex: primaryItems.length
+        ? Math.floor(Math.random() * primaryItems.length)
+        : 0,
+      fallbackIndex: fallbackItems.length
+        ? Math.floor(Math.random() * fallbackItems.length)
+        : 0,
+    };
+  }
+
+  const tryAdd = (item, useFallback = false) => {
+    if (!item) return false;
+    const suggestion = mapToSuggestion(item, fallbackLabel, choice);
+    const key = normalizeTitleKey(suggestion.title);
+    if (!key || seenTitles.has(key)) {
+      return false;
+    }
+    seenTitles.add(key);
+    if (useFallback) {
+      fallbackUsed = true;
+    }
+    suggestions.push(suggestion);
+    return true;
+  };
+
+  const computeAdvance = (added, length) => {
+    if (!length) return 0;
+    if (added <= 0) {
+      return Math.min(1, length);
+    }
+    const step = Math.min(added, amount, length);
+    return step === length ? 1 : step;
+  };
+
+  if (primaryItems.length) {
+    let added = 0;
+    for (
+      let steps = 0;
+      steps < primaryItems.length && suggestions.length < amount;
+      steps += 1
+    ) {
+      const index = (state.primaryIndex + steps) % primaryItems.length;
+      if (tryAdd(primaryItems[index], false)) {
+        added += 1;
+      }
+    }
+    const advance = computeAdvance(added, primaryItems.length);
+    state.primaryIndex = (state.primaryIndex + advance) % primaryItems.length;
+  }
+
+  if (suggestions.length < amount && fallbackItems.length) {
+    let added = 0;
+    for (
+      let steps = 0;
+      steps < fallbackItems.length && suggestions.length < amount;
+      steps += 1
+    ) {
+      const index = (state.fallbackIndex + steps) % fallbackItems.length;
+      if (tryAdd(fallbackItems[index], true)) {
+        added += 1;
+      }
+    }
+    const advance = computeAdvance(added, fallbackItems.length);
+    state.fallbackIndex = (state.fallbackIndex + advance) % fallbackItems.length;
+  }
+
+  if (suggestions.length === 0) {
+    tryAdd(
+      {
+        title:
+          fallbackLabel || (choice === "movie" ? "Movie night standby" : "Game night standby"),
+        summary: "Saving a special spot on our list while the API catches up.",
+        reason:
+          choice === "movie"
+            ? "Let's treat this as a rain check and refresh for fresh picks together."
+            : "Hit refresh for new quests or pick from our cross-play library anytime.",
+        image: getPlaceholderImage(
+          fallbackLabel || (choice === "movie" ? "Movie" : "Game"),
+          choice === "game" ? "game" : "movie"
+        ),
+      },
+      true
+    );
+  }
+
+  rotationState.set(rotationKey, state);
+  return { suggestions, fallbackUsed };
 }
 
 function renderSuggestions(items) {
@@ -872,11 +1022,6 @@ function updateGenreButtons(activeKey) {
 }
 
 async function loadSuggestions(choice, { genre = "any", resetCache = false } = {}) {
-  const cacheKey = getCacheKey(choice, { genre });
-  if (resetCache) {
-    cache.delete(cacheKey);
-  }
-
   const isMovie = choice === "movie";
   const loadingCopy = isMovie
     ? MOVIE_GENRES[genre]?.loadingCopy || MOVIE_GENRES.any.loadingCopy
@@ -890,8 +1035,9 @@ async function loadSuggestions(choice, { genre = "any", resetCache = false } = {
   }
 
   try {
-    const { items, fallbackUsed } = await fetchSuggestions(choice, { genre });
-    renderSuggestions(items);
+    const dataset = await prepareDataset(choice, { genre, reset: resetCache });
+    const { suggestions, fallbackUsed } = selectSuggestions(choice, { genre }, dataset);
+    renderSuggestions(suggestions);
 
     const config = isMovie
       ? MOVIE_GENRES[genre] || MOVIE_GENRES.any
