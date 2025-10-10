@@ -7,12 +7,16 @@ const suggestionsGrid = document.getElementById("suggestions-grid");
 const genrePicker = document.getElementById("genre-picker");
 const refreshButton = document.getElementById("refresh-button");
 
+const SUGGESTION_COUNT = 6;
+
 const MOVIE_GENRES = {
   any: {
     label: "Surprise mix",
     loadingCopy: "Pulling in a mix of light thrills, mystery, and romcom smiles just for you.",
     description:
       "A little sampler platter of the thrillers, mysteries, comedies, and romcoms we keep promising to watch together.",
+    fallbackDescription:
+      "Our personal stash of must-watch mysteries, thrillers, romcoms, and comedies while the API catches its breath.",
     endpoints: [
       "https://api.sampleapis.com/movies/romance",
       "https://api.sampleapis.com/movies/mystery",
@@ -52,6 +56,22 @@ const MOVIE_GENRES = {
           "Ghostbusters meets desi comedy – it's silly, spooky-light, and perfect for giggles across the screen.",
         image: "https://placehold.co/600x900/1f2933/eff6ff?text=Phone+Bhoot",
       },
+      {
+        title: "Jaane Tu... Ya Jaane Na (2008)",
+        summary:
+          "Two best friends insist they're not in love until life pulls them apart and forces them to confront their feelings.",
+        reason:
+          "Bollywood college nostalgia with singalong-worthy tracks – perfect for reminiscing on our own adventures.",
+        image: "https://placehold.co/600x900/312e81/ede9fe?text=Jaane+Tu",
+      },
+      {
+        title: "The Adam Project (2022)",
+        summary:
+          "A time-traveling pilot teams up with his younger self to save the future while healing old wounds.",
+        reason:
+          "Sci-fi heart with quick banter – ideal for nerding out together and sharing our favorite lines.",
+        image: "https://placehold.co/600x900/1f2933/eff6ff?text=Adam+Project",
+      },
     ],
   },
   romcom: {
@@ -59,6 +79,8 @@ const MOVIE_GENRES = {
     loadingCopy: "Collecting soft, heartwarming romances that feel like us.",
     description:
       "Warm, flirty romcoms so we can blush, laugh, and quote our favorite lines back to each other.",
+    fallbackDescription:
+      "I grabbed the romcoms that always make us smile in case the API leaves this row empty.",
     endpoints: ["https://api.sampleapis.com/movies/romance"],
     fallback: [
       {
@@ -93,6 +115,22 @@ const MOVIE_GENRES = {
           "Short, slice-of-life episodes about a long-term couple – so relatable that we'll keep saying, 'that's us!'.",
         image: "https://placehold.co/600x900/b83280/fef9ff?text=Little+Things",
       },
+      {
+        title: "Hasee Toh Phasee (2014)",
+        summary:
+          "A quirky scientist and a stressed event planner collide a week before his wedding, discovering an unexpected connection.",
+        reason:
+          "Adorkable chaos, dance numbers, and brainy banter – tailor-made for a light-hearted night with you.",
+        image: "https://placehold.co/600x900/b83280/fef9ff?text=Hasee+Toh+Phasee",
+      },
+      {
+        title: "Crazy Rich Asians (2018)",
+        summary:
+          "Rachel Chu discovers her boyfriend's family is ridiculously wealthy, plunging into high-society antics and heartfelt moments.",
+        reason:
+          "Glitzy romcom fun with plenty of jokes and big feelings – ideal for gossiping over video chat.",
+        image: "https://placehold.co/600x900/b83280/fef9ff?text=Crazy+Rich+Asians",
+      },
     ],
   },
   comedy: {
@@ -100,6 +138,8 @@ const MOVIE_GENRES = {
     loadingCopy: "Hunting down the funniest Hindi and English picks for our shared watchlist.",
     description:
       "Feel-good comedies that keep the banter rolling while we snack and send each other reaction selfies.",
+    fallbackDescription:
+      "Serving our tried-and-true comfort comedies until the API sends new laughs our way.",
     endpoints: ["https://api.sampleapis.com/movies/comedy"],
     fallback: [
       {
@@ -134,6 +174,84 @@ const MOVIE_GENRES = {
           "30-minute bursts of joy we can binge or savor, complete with heists, hugs, and Halloween references.",
         image: "https://placehold.co/600x900/127c71/edfff9?text=B99+S1",
       },
+      {
+        title: "Badhaai Ho (2018)",
+        summary:
+          "When a middle-aged couple announces an unexpected pregnancy, their adult son must rethink family, love, and pride.",
+        reason:
+          "Wholesome hilarity with heartfelt moments – perfect for giggling about family chaos together.",
+        image: "https://placehold.co/600x900/127c71/edfff9?text=Badhaai+Ho",
+      },
+      {
+        title: "The Intern (2015)",
+        summary:
+          "A 70-year-old widower becomes a senior intern at a fashion startup, forming an unlikely friendship with the founder.",
+        reason:
+          "Soft comedy with warm life lessons – ideal for chatting about work, dreams, and us.",
+        image: "https://placehold.co/600x900/127c71/edfff9?text=The+Intern",
+      },
+    ],
+  },
+  feelgood: {
+    label: "Comfort binge",
+    loadingCopy: "Stacking up the coziest romcom-comedy blend for a low-stress cuddle over video call.",
+    description:
+      "Soft, feel-good stories with big hearts so we can unwind together and trade favorite quotes.",
+    fallbackDescription:
+      "Serving our ultra-cozy go-tos while the API warms up fresh comfort watches for us.",
+    endpoints: [
+      "https://api.sampleapis.com/movies/romance",
+      "https://api.sampleapis.com/movies/comedy",
+    ],
+    fallback: [
+      {
+        title: "Dil Dhadakne Do (2015)",
+        summary:
+          "A wealthy Punjabi family confronts secrets and relationships while cruising the Mediterranean with friends.",
+        reason:
+          "Family drama plus comedy, all on a luxe cruise – perfect for dreaming up our own getaway.",
+        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=Dil+Dhadakne+Do",
+      },
+      {
+        title: "Notting Hill (1999)",
+        summary:
+          "A bookshop owner falls for a famous actress, leading to gentle humor, mishaps, and tender romance.",
+        reason:
+          "Charming British romcom vibes that feel like a warm hug – ideal for quoting the sweetest lines.",
+        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=Notting+Hill",
+      },
+      {
+        title: "Zindagi Na Milegi Dobara (2011)",
+        summary:
+          "Three friends take a life-changing road trip across Spain, embracing adventure and reconnecting with themselves.",
+        reason:
+          "Feel-good travel inspo with poetry, friendship, and bucket-list energy to share together.",
+        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=ZNMD",
+      },
+      {
+        title: "About Time (2013)",
+        summary:
+          "A man with the ability to travel through time uses his gift to perfect love, family, and life's simple joys.",
+        reason:
+          "Timey-wimey romance that reminds us to savor every ordinary moment we share.",
+        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=About+Time",
+      },
+      {
+        title: "Lunchbox (2013)",
+        summary:
+          "A misdelivered lunchbox sparks an unlikely epistolary friendship between a lonely widower and a neglected housewife.",
+        reason:
+          "Tender storytelling and heartfelt notes – it's basically our long-distance love in film form.",
+        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=Lunchbox",
+      },
+      {
+        title: "Paddington 2 (2017)",
+        summary:
+          "A polite bear in London goes on an adventure to clear his name, spreading kindness wherever he goes.",
+        reason:
+          "Pure serotonin with British humor and heartfelt lessons – great for turning any day into a warm blanket night.",
+        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=Paddington+2",
+      },
     ],
   },
   mystery: {
@@ -141,6 +259,8 @@ const MOVIE_GENRES = {
     loadingCopy: "Gathering clever mysteries so Detective Saanu & Agent Aloo can solve the case together.",
     description:
       "Whodunits and light thrillers that keep us guessing aloud and comparing theories in our chat.",
+    fallbackDescription:
+      "Calling in our favorite clue-filled picks until the API serves up fresh cases to crack.",
     endpoints: ["https://api.sampleapis.com/movies/mystery"],
     fallback: [
       {
@@ -175,6 +295,22 @@ const MOVIE_GENRES = {
           "A taut Hindi thriller that's gripping without being gory – ideal for leaning into suspense together.",
         image: "https://placehold.co/600x900/2f3061/f2f2ff?text=Badla",
       },
+      {
+        title: "Sherlock (S1)",
+        summary:
+          "A modern-day Sherlock Holmes solves London crimes with Dr. Watson, mixing razor-sharp deductions and wit.",
+        reason:
+          "Brisk mystery episodes perfect for pausing mid-case to trade theories on video call.",
+        image: "https://placehold.co/600x900/2f3061/f2f2ff?text=Sherlock",
+      },
+      {
+        title: "The Afterparty (S1)",
+        summary:
+          "Each episode retells a high-school reunion murder from a different guest's genre-twisted perspective.",
+        reason:
+          "Playful whodunit storytelling that lets us pick favorites and predict the finale together.",
+        image: "https://placehold.co/600x900/2f3061/f2f2ff?text=Afterparty",
+      },
     ],
   },
   thriller: {
@@ -182,6 +318,8 @@ const MOVIE_GENRES = {
     loadingCopy: "Picking the edge-of-seat stories that stay light enough for a cozy night.",
     description:
       "Tension with a soft landing – thrillers that keep hearts racing but still let us sleep easy afterward.",
+    fallbackDescription:
+      "Swapping in our trusted gentle thrillers until the API restocks this suspenseful lineup.",
     endpoints: ["https://api.sampleapis.com/movies/thrillers"],
     fallback: [
       {
@@ -216,6 +354,22 @@ const MOVIE_GENRES = {
           "French gentleman thief with Robin Hood charm – stylish, smart, and satisfying in every episode.",
         image: "https://placehold.co/600x900/8c2f39/fff4f4?text=Lupin",
       },
+      {
+        title: "Kahaani (2012)",
+        summary:
+          "A pregnant woman arrives in Kolkata searching for her missing husband, uncovering secrets that put her life in danger.",
+        reason:
+          "Gripping yet grounded suspense with Vidya Balan leading the charge – perfect for theory crafting together.",
+        image: "https://placehold.co/600x900/8c2f39/fff4f4?text=Kahaani",
+      },
+      {
+        title: "The Night Manager (2023)",
+        summary:
+          "A former soldier infiltrates an arms dealer's inner circle, balancing espionage with moral dilemmas.",
+        reason:
+          "Stylish spy thrills that stay bingeable without going too dark – we can whisper our favorite twists.",
+        image: "https://placehold.co/600x900/8c2f39/fff4f4?text=Night+Manager",
+      },
     ],
   },
 };
@@ -229,7 +383,11 @@ const CROSSPLAY_GAMES = [
       "Drop into Zero Build duos or Battle Royale and show off our teamwork no matter which screen we're on.",
     note: "Cross-play: Link our Epic accounts (Xbox gamertag + PC) and invite through the Epic friends list.",
     aliases: ["Fortnite Battle Royale"],
-    image: "https://placehold.co/640x360/0f172a/e0f2fe?text=Fortnite",
+    image: createGameArt("Fortnite", {
+      background: "#0ea5e9",
+      accent: "#1d4ed8",
+      emoji: "🛡️",
+    }),
   },
   {
     title: "Rocket League",
@@ -238,7 +396,11 @@ const CROSSPLAY_GAMES = [
     reason:
       "Turbo-charge our date night with car soccer chaos — perfect for cheering every goal in party chat.",
     note: "Cross-play: Enable it in Settings → Gameplay, then create a private match with a shared name & password.",
-    image: "https://placehold.co/640x360/0f172a/e0f2fe?text=Rocket+League",
+    image: createGameArt("Rocket League", {
+      background: "#fb7185",
+      accent: "#be123c",
+      emoji: "⚽️",
+    }),
   },
   {
     title: "Sea of Thieves",
@@ -247,7 +409,11 @@ const CROSSPLAY_GAMES = [
     reason:
       "Set sail as a pirate duo, solve riddles, and clink grog mugs while steering the same ship across the waves.",
     note: "Cross-play: Invite via the Xbox companion app or Xbox Game Bar to drop into the same crew.",
-    image: "https://placehold.co/640x360/0f172a/e0f2fe?text=Sea+of+Thieves",
+    image: createGameArt("Sea of Thieves", {
+      background: "#0f766e",
+      accent: "#115e59",
+      emoji: "🏴‍☠️",
+    }),
   },
   {
     title: "Minecraft Dungeons",
@@ -256,7 +422,11 @@ const CROSSPLAY_GAMES = [
     reason:
       "Dive into dungeon-crawling co-op, share loot, and plan our next enchantments together in real time.",
     note: "Cross-play: Sign in with Microsoft accounts on both sides, then use the in-game friends tab to invite.",
-    image: "https://placehold.co/640x360/0f172a/e0f2fe?text=Minecraft+Dungeons",
+    image: createGameArt("Minecraft Dungeons", {
+      background: "#ea580c",
+      accent: "#c2410c",
+      emoji: "🛡️",
+    }),
   },
   {
     title: "Overcooked! 2",
@@ -265,7 +435,11 @@ const CROSSPLAY_GAMES = [
     reason:
       "Coordinate our kitchen like pros, yell playful orders, and laugh when the onion soup inevitably catches fire.",
     note: "Cross-play: Host an online session and turn on cross-platform play from the main menu options.",
-    image: "https://placehold.co/640x360/0f172a/e0f2fe?text=Overcooked!+2",
+    image: createGameArt("Overcooked! 2", {
+      background: "#f97316",
+      accent: "#facc15",
+      emoji: "🍳",
+    }),
   },
   {
     title: "Fall Guys",
@@ -274,7 +448,11 @@ const CROSSPLAY_GAMES = [
     reason:
       "Race through obstacle courses as a matching duo and celebrate every crown-worthy near miss together.",
     note: "Cross-play: Add each other using Epic display names, then squad up from the inviting player's party screen.",
-    image: "https://placehold.co/640x360/0f172a/e0f2fe?text=Fall+Guys",
+    image: createGameArt("Fall Guys", {
+      background: "#ec4899",
+      accent: "#9333ea",
+      emoji: "👑",
+    }),
   },
 ];
 
@@ -282,6 +460,8 @@ const GAME_CONFIG = {
   title: "Let's squad up",
   description:
     "Every card is vetted for Xbox ↔ Windows cross-play, so Team Aloo & Saanu can jump in together instantly.",
+  fallbackDescription:
+    "Our handpicked cross-play library is ready to roll while we wait on fresh API matches.",
   endpoints: ["https://api.sampleapis.com/xbox/games"],
   fallback: CROSSPLAY_GAMES,
 };
@@ -310,9 +490,73 @@ function getCacheKey(choice, { genre = "any" } = {}) {
   return choice === "movie" ? `${choice}-${genre}` : choice;
 }
 
-function pickRandomItems(array, amount = 3) {
-  const shuffled = [...array].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, Math.min(amount, shuffled.length));
+function shuffle(array) {
+  const clone = [...array];
+  for (let i = clone.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [clone[i], clone[j]] = [clone[j], clone[i]];
+  }
+  return clone;
+}
+
+function buildSuggestionList({
+  choice,
+  genre = "any",
+  primaryItems = [],
+  fallbackItems = [],
+  amount = SUGGESTION_COUNT,
+}) {
+  const fallbackLabel = choice === "movie" ? MOVIE_GENRES[genre]?.label : undefined;
+  const suggestions = [];
+  const seenTitles = new Set();
+  let fallbackUsed = false;
+
+  function tryAdd(item, useFallback = false) {
+    if (!item) return;
+    const suggestion = mapToSuggestion(item, fallbackLabel, choice);
+    const key = normalizeTitleKey(suggestion.title);
+    if (!key || seenTitles.has(key)) {
+      return;
+    }
+    seenTitles.add(key);
+    if (useFallback) {
+      fallbackUsed = true;
+    }
+    suggestions.push(suggestion);
+  }
+
+  shuffle(primaryItems).some((item) => {
+    tryAdd(item, false);
+    return suggestions.length >= amount;
+  });
+
+  if (suggestions.length < amount) {
+    shuffle(fallbackItems).some((item) => {
+      tryAdd(item, true);
+      return suggestions.length >= amount;
+    });
+  }
+
+  if (suggestions.length === 0) {
+    tryAdd(
+      {
+        title:
+          fallbackLabel || (choice === "movie" ? "Movie night standby" : "Game night standby"),
+        summary: "Saving a special spot on our list while the API catches up.",
+        reason:
+          choice === "movie"
+            ? "Let's treat this as a rain check and refresh for fresh picks together."
+            : "Hit refresh for new quests or pick from our cross-play library anytime.",
+        image: getPlaceholderImage(
+          fallbackLabel || (choice === "movie" ? "Movie" : "Game"),
+          choice === "game" ? "game" : "movie"
+        ),
+      },
+      true
+    );
+  }
+
+  return { suggestions, fallbackUsed };
 }
 
 function normalizeGenres(genre) {
@@ -344,6 +588,38 @@ function getPlaceholderImage(title, type = "movie") {
       : { bg: "1f2933", fg: "eff6ff" };
   const encodedTitle = encodeURIComponent(title || (type === "game" ? "Game" : "Movie"));
   return `https://placehold.co/${size}/${palette.bg}/${palette.fg}?text=${encodedTitle}`;
+}
+
+function escapeForSvg(text) {
+  return `${text ?? ""}`
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function createGameArt(
+  title,
+  { background = "#0f172a", accent = "#7c3aed", emoji = "🎮" } = {}
+) {
+  const safeTitle = escapeForSvg(title || "Game night");
+  const safeEmoji = escapeForSvg(emoji || "🎮");
+  const svg = `<?xml version="1.0" encoding="UTF-8"?>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
+      <defs>
+        <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="${background}" />
+          <stop offset="100%" stop-color="${accent}" />
+        </linearGradient>
+      </defs>
+      <rect fill="url(#grad)" width="400" height="225" rx="28" />
+      <g font-family="'Quicksand', 'Segoe UI', sans-serif" fill="#ffffff">
+        <text x="32" y="92" font-size="56" opacity="0.85">${safeEmoji}</text>
+        <text x="32" y="148" font-size="32" font-weight="700">${safeTitle}</text>
+        <text x="32" y="182" font-size="16" opacity="0.75">Xbox ↔ PC co-op ready</text>
+      </g>
+    </svg>`;
+
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
 function mapToSuggestion(item, fallbackLabel, choice) {
@@ -437,6 +713,10 @@ function filterMovies(items, genreKey) {
         return genres.some((value) => /romance|romantic|rom-com|romcom|love/i.test(value));
       case "comedy":
         return genres.some((value) => /comedy/i.test(value));
+      case "feelgood":
+        return genres.some((value) =>
+          /comedy|romance|family|feel[- ]?good|holiday|drama/i.test(value)
+        );
       case "mystery":
         return genres.some((value) => /mystery|detective|crime|whodunit/i.test(value));
       case "thriller":
@@ -479,6 +759,10 @@ async function fetchSuggestions(choice, { genre = "any" } = {}) {
     choice === "movie"
       ? MOVIE_GENRES[genre]?.endpoints || MOVIE_GENRES.any.endpoints
       : GAME_CONFIG.endpoints;
+  const fallbackItems =
+    choice === "movie"
+      ? MOVIE_GENRES[genre]?.fallback || MOVIE_GENRES.any.fallback
+      : GAME_CONFIG.fallback;
 
   try {
     const results = await Promise.all(
@@ -501,27 +785,29 @@ async function fetchSuggestions(choice, { genre = "any" } = {}) {
         ? filterMovies(flattened, genre)
         : filterGames(flattened);
 
-    if (!Array.isArray(filtered) || filtered.length === 0) {
-      throw new Error("No usable results");
-    }
+    const { suggestions, fallbackUsed } = buildSuggestionList({
+      choice,
+      genre,
+      primaryItems: filtered,
+      fallbackItems,
+      amount: SUGGESTION_COUNT,
+    });
 
-    const suggestions = pickRandomItems(filtered, 3).map((item) =>
-      mapToSuggestion(item, choice === "movie" ? MOVIE_GENRES[genre]?.label : undefined, choice)
-    );
-
-    cache.set(cacheKey, suggestions);
-    return suggestions;
+    const payload = { items: suggestions, fallbackUsed };
+    cache.set(cacheKey, payload);
+    return payload;
   } catch (error) {
     console.warn("Falling back to offline suggestions", error);
-    const fallback =
-      choice === "movie"
-        ? MOVIE_GENRES[genre]?.fallback || MOVIE_GENRES.any.fallback
-        : GAME_CONFIG.fallback;
-    const suggestions = pickRandomItems(fallback, 3).map((item) =>
-      mapToSuggestion(item, choice === "movie" ? MOVIE_GENRES[genre]?.label : undefined, choice)
-    );
-    cache.set(cacheKey, suggestions);
-    return suggestions;
+    const { suggestions } = buildSuggestionList({
+      choice,
+      genre,
+      primaryItems: [],
+      fallbackItems,
+      amount: SUGGESTION_COUNT,
+    });
+    const payload = { items: suggestions, fallbackUsed: true };
+    cache.set(cacheKey, payload);
+    return payload;
   }
 }
 
@@ -604,11 +890,24 @@ async function loadSuggestions(choice, { genre = "any", resetCache = false } = {
   }
 
   try {
-    const items = await fetchSuggestions(choice, { genre });
+    const { items, fallbackUsed } = await fetchSuggestions(choice, { genre });
     renderSuggestions(items);
-    suggestionsDescription.textContent = isMovie
-      ? MOVIE_GENRES[genre]?.description || MOVIE_GENRES.any.description
-      : GAME_CONFIG.description;
+
+    const config = isMovie
+      ? MOVIE_GENRES[genre] || MOVIE_GENRES.any
+      : GAME_CONFIG;
+
+    const descriptionCopy = fallbackUsed
+      ? config?.fallbackDescription ||
+        (isMovie
+          ? "I pulled from our personal watchlist while the API catches up."
+          : "Serving our trusted cross-play picks while waiting on new matches.")
+      : config?.description ||
+        (isMovie
+          ? MOVIE_GENRES.any.description
+          : GAME_CONFIG.description);
+
+    suggestionsDescription.textContent = descriptionCopy;
     refreshButton.hidden = false;
     refreshButton.removeAttribute("hidden");
     refreshButton.dataset.choice = choice;
@@ -669,6 +968,9 @@ async function handleChoice(choice) {
   state.choice = choice;
 
   if (choice === "movie") {
+    if (!MOVIE_GENRES[state.genre]) {
+      state.genre = "any";
+    }
     showGenrePicker();
     suggestionsTitle.textContent = "Movie magic for my Saanu";
     invitationTitle.textContent = "Movie night coming up, Saanu!";

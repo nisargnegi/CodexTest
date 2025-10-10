@@ -1,6 +1,6 @@
 # Long-Distance Date Night Invite
 
-A single-page website that invites your long-distance girlfriend, Saanu, to pick between a movie night or a co-op gaming night with you (Aloo). It uses the free [Sample APIs](https://sampleapis.com/) movie and Xbox datasets to surface light thriller, comedy, romcom, and mystery suggestions, and gracefully falls back to handpicked favorites if the API is unavailable. Game picks are double-checked against a curated cross-play list so every option works between Xbox and Windows PC, and every card now includes a poster-style image, a quick summary, and a personal note.
+A single-page website that invites your long-distance girlfriend, Saanu, to pick between a movie night or a co-op gaming night with you (Aloo). It uses the free [Sample APIs](https://sampleapis.com/) movie and Xbox datasets to surface light thriller, comedy, romcom, mystery, and cozy comfort suggestions, and gracefully falls back to handpicked favorites if the API is unavailable. Game picks are double-checked against a curated cross-play list so every option works between Xbox and Windows PC, and every card now includes a poster-style image, a quick summary, a personal note, and for games a bespoke co-op themed illustration.
 
 ## Getting started locally
 
@@ -30,10 +30,10 @@ there so the browser will allow the fetch requests.
 
 Once the page is open in your browser:
 
-1. Click the **Movie Night** pill button (the left option) to load three streaming ideas, confirm the refresh button appears, and verify that each card displays an image, summary, and personal note.
-2. Use the genre chips (Surprise mix, Romcom glow, Comedy night, Mystery & sleuthing, Gentle thrills) to filter the movie picks and confirm each one refetches suggestions.
-3. Click **Show me different ideas** to ensure a new trio of options loads for the active genre.
-4. Click the **Co-op Game Night** pill button to swap the copy, cards, and after-date description for gaming suggestions. Confirm the genre chips disappear in game mode and each card lists the cross-play hookup tip.
+1. Click the **Movie Night** pill button (the left option) to load six streaming ideas, confirm the refresh button appears, and verify that each card displays an image, summary, and personal note.
+2. Use the genre chips (Surprise mix, Romcom glow, Comedy night, Comfort binge, Mystery & sleuthing, Gentle thrills) to filter the movie picks and confirm each one refetches suggestions.
+3. Click **Show me different ideas** to ensure a fresh set of six options loads for the active genre.
+4. Click the **Co-op Game Night** pill button to swap the copy, cards, and after-date description for gaming suggestions. Confirm the genre chips disappear in game mode, each card lists the cross-play hookup tip, and every suggestion shows the illustrated co-op art.
 5. Optionally toggle between the two choices a few times to make sure the content updates smoothly without needing a refresh.
 
 These steps are exactly what a visitor will do, so running through them verifies both the layout and the API/fallback logic.
@@ -51,7 +51,7 @@ These steps are exactly what a visitor will do, so running through them verifies
 
 GitHub Pages will automatically redeploy every time you push an update, making it a zero-cost way to keep the invite fresh.
 
-> **Tip for seeing new changes immediately:** Browsers can aggressively cache `styles.css` and `script.js`. Any time you push larger updates, bump the version query in `index.html` (for example, change `?v=4` to `?v=5`) so Pages serves the newest files without requiring visitors to hard-refresh.
+> **Tip for seeing new changes immediately:** Browsers can aggressively cache `styles.css` and `script.js`. Any time you push larger updates, bump the version query in `index.html` (for example, change `?v=5` to `?v=6`) so Pages serves the newest files without requiring visitors to hard-refresh.
 
 ### Other free static hosting options
 
@@ -66,14 +66,14 @@ These providers include free HTTPS certificates and let you add a custom domain 
 ## Customizing the experience
 
 - Update the opening message in `index.html` to personalize the invitation even more.
-- Adjust the `MOVIE_GENRES` object in `script.js` to tweak the genre labels, API endpoints, loading copy, and fallbacks for each vibe.
-- Edit the `CROSSPLAY_GAMES` list in `script.js` if you have favorite cross-play titles beyond the defaults.
+- Adjust the `MOVIE_GENRES` object in `script.js` to tweak the genre labels, API endpoints, loading copy, and fallbacks for each vibe (there's now a "Comfort binge" chip alongside the thriller, romcom, comedy, mystery, and surprise mixes).
+- Edit the `CROSSPLAY_GAMES` list in `script.js` if you have favorite cross-play titles beyond the defaults, or update the color/emoji pairings used to generate the bespoke illustrations via `createGameArt()`.
 - Adjust styling tokens in `styles.css` to match your shared aesthetic or add your photos as backgrounds.
 - Replace the placeholder poster URLs in the `MOVIE_GENRES` and `CROSSPLAY_GAMES` fallbacks with your own hosted artwork if you have official imagery handy.
 
 ## APIs used
 
-- **Movies:** `https://api.sampleapis.com/movies/*` (romance, mystery, comedy, thrillers)
+- **Movies:** `https://api.sampleapis.com/movies/*` (romance, comedy, mystery, thrillers — combined for the Surprise mix and Comfort binge chips)
 - **Games:** `https://api.sampleapis.com/xbox/games` (filtered against a curated Xbox ↔ PC cross-play list)
 
 The site automatically shows curated fallback lists if either service is unreachable so your date plans are never interrupted.
