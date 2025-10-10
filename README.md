@@ -37,7 +37,28 @@ Once the page is open in your browser:
 
 These steps are exactly what a visitor will do, so running through them verifies both the layout and the API/fallback logic.
 
+## Deploying for free
 
+### GitHub Pages (recommended)
+
+1. [Create a new GitHub repository](https://github.com/new) (public or private both work with Pages).
+2. Upload or push the three project files (`index.html`, `styles.css`, `script.js`) and the `README.md` to the repository's default branch (`main` or `master`).
+   - If you cloned this template locally, run `git remote add origin https://github.com/<your-username>/<repository-name>.git`, then `git push -u origin main`.
+3. In the GitHub web UI, open **Settings → Pages**.
+4. Under **Source**, select the default branch and keep the `/ (root)` option, then click **Save**.
+5. Wait a minute or two for the deployment badge near the top of the page to turn green. Your invite will then be live at `https://<your-username>.github.io/<repository-name>/`.
+
+GitHub Pages will automatically redeploy every time you push an update, making it a zero-cost way to keep the invite fresh.
+
+### Other free static hosting options
+
+If you prefer a drag-and-drop flow, services like [Netlify Drop](https://app.netlify.com/drop) and [Vercel](https://vercel.com/) also host static sites for free:
+
+1. Build the project by running one of the local preview servers above so you can double-check everything.
+2. Drag the project folder (or a ZIP of it) into Netlify Drop, or create a new Vercel project and point it at your GitHub repository.
+3. Both services return a shareable URL immediately, and will automatically redeploy whenever you upload a new ZIP or push changes to the connected repository.
+
+These providers include free HTTPS certificates and let you add a custom domain if you want to personalize the link further.
 
 ## Customizing the experience
 

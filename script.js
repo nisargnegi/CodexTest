@@ -10,7 +10,8 @@ const FALLBACK_SUGGESTIONS = {
   movie: [
     {
       title: "Karwaan (2018)",
-      description: "A heartwarming road-trip dramedy with Dulquer Salman & Irrfan Khan—perfect for easy laughs and tender feels.",
+      description:
+        "A heartwarming road-trip dramedy with Dulquer Salman & Irrfan Khan—perfect for easy laughs and tender feels.",
     },
     {
       title: "The Half of It (2020)",
@@ -28,7 +29,8 @@ const FALLBACK_SUGGESTIONS = {
   game: [
     {
       title: "It Takes Two",
-      description: "A co-op adventure full of heartfelt storytelling and clever puzzles. We can tackle each challenge as a team.",
+      description:
+        "A co-op adventure full of heartfelt storytelling and clever puzzles. We can tackle each challenge as a team.",
     },
     {
       title: "Overcooked! 2",
