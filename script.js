@@ -8,1159 +8,408 @@ const genrePicker = document.getElementById("genre-picker");
 const refreshButton = document.getElementById("refresh-button");
 
 const SUGGESTION_COUNT = 6;
+const MOVIE_API_BASE = "https://api.sampleapis.com/movies";
 
-const MOVIE_GENRES = {
-  any: {
-    label: "Surprise mix",
-    loadingCopy: "Pulling in a mix of light thrills, mystery, and romcom smiles just for you.",
+const MOVIE_GENRES = [
+  {
+    id: "romance",
+    label: "Romance",
     description:
-      "A little sampler platter of the thrillers, mysteries, comedies, and romcoms we keep promising to watch together.",
-    fallbackDescription:
-      "Our personal stash of must-watch mysteries, thrillers, romcoms, and comedies while the API catches its breath.",
-    endpoints: [
-      "https://api.sampleapis.com/movies/romance",
-      "https://api.sampleapis.com/movies/mystery",
-      "https://api.sampleapis.com/movies/comedy",
-      "https://api.sampleapis.com/movies/thrillers",
-    ],
-    fallback: [
-      {
-        title: "Karwaan (2018)",
-        summary:
-          "When a mistaken corpse delivery sends three strangers on a road trip from Bangalore to Kochi, they find closure, friendship, and plenty of laughs.",
-        reason:
-          "A breezy Hindi road-trip dramedy so we can laugh with Irrfan Khan and trade travel daydreams after the credits.",
-        image: "https://placehold.co/600x900/1f2933/eff6ff?text=Karwaan",
-      },
-      {
-        title: "The Half of It (2020)",
-        summary:
-          "Shy wordsmith Ellie agrees to ghostwrite love letters for a classmate, only to fall for the same girl in this tender coming-of-age story.",
-        reason:
-          "Thoughtful English romcom energy with plenty of 'pause to discuss' moments for us on call.",
-        image: "https://placehold.co/600x900/1f2933/eff6ff?text=The+Half+of+It",
-      },
-      {
-        title: "Enola Holmes (2022)",
-        summary:
-          "Sherlock's fearless younger sister cracks a missing-person case in bustling Victorian London, blending mystery with playful rebellion.",
-        reason:
-          "Playful mystery vibes where we can guess clues together and cheer for Millie Bobby Brown's sleuthing.",
-        image: "https://placehold.co/600x900/1f2933/eff6ff?text=Enola+Holmes",
-      },
-      {
-        title: "Phone Bhoot (2022)",
-        summary:
-          "Two ghost-obsessed slackers team up with a friendly spirit to run a ghostbusting startup in this spooky-silly Hindi comedy.",
-        reason:
-          "Ghostbusters meets desi comedy – it's silly, spooky-light, and perfect for giggles across the screen.",
-        image: "https://placehold.co/600x900/1f2933/eff6ff?text=Phone+Bhoot",
-      },
-      {
-        title: "Jaane Tu... Ya Jaane Na (2008)",
-        summary:
-          "Two best friends insist they're not in love until life pulls them apart and forces them to confront their feelings.",
-        reason:
-          "Bollywood college nostalgia with singalong-worthy tracks – perfect for reminiscing on our own adventures.",
-        image: "https://placehold.co/600x900/312e81/ede9fe?text=Jaane+Tu",
-      },
-      {
-        title: "The Adam Project (2022)",
-        summary:
-          "A time-traveling pilot teams up with his younger self to save the future while healing old wounds.",
-        reason:
-          "Sci-fi heart with quick banter – ideal for nerding out together and sharing our favorite lines.",
-        image: "https://placehold.co/600x900/1f2933/eff6ff?text=Adam+Project",
-      },
-    ],
+      "Sweet, heart-tugging romcoms so we can laugh, swoon, and swap favorite lines after the credits.",
+    loadingCopy: "Setting the mood with the dreamiest picks…",
   },
-  romcom: {
-    label: "Romcom glow",
-    loadingCopy: "Collecting soft, heartwarming romances that feel like us.",
+  {
+    id: "animation",
+    label: "Animation",
     description:
-      "Warm, flirty romcoms so we can blush, laugh, and quote our favorite lines back to each other.",
-    fallbackDescription:
-      "I grabbed the romcoms that always make us smile in case the API leaves this row empty.",
-    endpoints: ["https://api.sampleapis.com/movies/romance"],
-    fallback: [
-      {
-        title: "Jab We Met (2007)",
-        summary:
-          "A heartbroken businessman finds joy again after meeting a free-spirited woman on a train, leading to self-discovery and second chances.",
-        reason:
-          "Classic Hindi romcom chaos – I'll be the Aditya to your Geet while we shout the lines together.",
-        image: "https://placehold.co/600x900/b83280/fef9ff?text=Jab+We+Met",
-      },
-      {
-        title: "Yeh Jawaani Hai Deewani (2013)",
-        summary:
-          "A group of friends reunites across years and continents, balancing wanderlust with heartfelt relationships and romance.",
-        reason:
-          "Travel, friendship, and slow-burn romance with enough feel-good scenes to make us plan our own reunion.",
-        image: "https://placehold.co/600x900/b83280/fef9ff?text=YJHD",
-      },
-      {
-        title: "Set It Up (2018)",
-        summary:
-          "Two overworked assistants scheme to set up their demanding bosses, only to spark their own unexpected chemistry.",
-        reason:
-          "Light English romcom matchmaking that feels like texting memes while cheering for the leads.",
-        image: "https://placehold.co/600x900/b83280/fef9ff?text=Set+It+Up",
-      },
-      {
-        title: "Little Things (S1)",
-        summary:
-          "Young couple Dhruv and Kavya navigate everyday Mumbai life, showcasing the intimate rhythms of long-term love.",
-        reason:
-          "Short, slice-of-life episodes about a long-term couple – so relatable that we'll keep saying, 'that's us!'.",
-        image: "https://placehold.co/600x900/b83280/fef9ff?text=Little+Things",
-      },
-      {
-        title: "Hasee Toh Phasee (2014)",
-        summary:
-          "A quirky scientist and a stressed event planner collide a week before his wedding, discovering an unexpected connection.",
-        reason:
-          "Adorkable chaos, dance numbers, and brainy banter – tailor-made for a light-hearted night with you.",
-        image: "https://placehold.co/600x900/b83280/fef9ff?text=Hasee+Toh+Phasee",
-      },
-      {
-        title: "Crazy Rich Asians (2018)",
-        summary:
-          "Rachel Chu discovers her boyfriend's family is ridiculously wealthy, plunging into high-society antics and heartfelt moments.",
-        reason:
-          "Glitzy romcom fun with plenty of jokes and big feelings – ideal for gossiping over video chat.",
-        image: "https://placehold.co/600x900/b83280/fef9ff?text=Crazy+Rich+Asians",
-      },
-    ],
+      "Bright, charming animated stories that feel like a cozy hug, no matter how many miles between us.",
+    loadingCopy: "Gathering the sweetest animated tales…",
   },
-  comedy: {
-    label: "Comedy night",
-    loadingCopy: "Hunting down the funniest Hindi and English picks for our shared watchlist.",
+  {
+    id: "classic",
+    label: "Classic",
     description:
-      "Feel-good comedies that keep the banter rolling while we snack and send each other reaction selfies.",
-    fallbackDescription:
-      "Serving our tried-and-true comfort comedies until the API sends new laughs our way.",
-    endpoints: ["https://api.sampleapis.com/movies/comedy"],
-    fallback: [
-      {
-        title: "Stree (2018)",
-        summary:
-          "In a small town plagued by a legendary spirit, a tailor and his friends must solve the mystery to save their loved ones.",
-        reason:
-          "Horror-comedy but mostly comedy – we can pretend to be brave for each other and laugh at Rajkummar Rao.",
-        image: "https://placehold.co/600x900/127c71/edfff9?text=Stree",
-      },
-      {
-        title: "Chupke Chupke (1975)",
-        summary:
-          "A newlywed botany professor plays a prank by impersonating a driver, leading to a cascade of witty misunderstandings.",
-        reason:
-          "An old-school Hindi classic that's still peak wholesome comedy for a chill evening.",
-        image: "https://placehold.co/600x900/127c71/edfff9?text=Chupke+Chupke",
-      },
-      {
-        title: "The Nice Guys (2016)",
-        summary:
-          "An unlikely detective duo investigates a missing person case in 1970s Los Angeles, blending action with sharp humor.",
-        reason:
-          "Buddy-cop laughs with mystery sprinkles – perfect for quipping one-liners back and forth.",
-        image: "https://placehold.co/600x900/127c71/edfff9?text=The+Nice+Guys",
-      },
-      {
-        title: "Brooklyn Nine-Nine (S1)",
-        summary:
-          "Precinct 99's offbeat detectives solve crimes while keeping the laughs coming in this workplace comedy.",
-        reason:
-          "30-minute bursts of joy we can binge or savor, complete with heists, hugs, and Halloween references.",
-        image: "https://placehold.co/600x900/127c71/edfff9?text=B99+S1",
-      },
-      {
-        title: "Badhaai Ho (2018)",
-        summary:
-          "When a middle-aged couple announces an unexpected pregnancy, their adult son must rethink family, love, and pride.",
-        reason:
-          "Wholesome hilarity with heartfelt moments – perfect for giggling about family chaos together.",
-        image: "https://placehold.co/600x900/127c71/edfff9?text=Badhaai+Ho",
-      },
-      {
-        title: "The Intern (2015)",
-        summary:
-          "A 70-year-old widower becomes a senior intern at a fashion startup, forming an unlikely friendship with the founder.",
-        reason:
-          "Soft comedy with warm life lessons – ideal for chatting about work, dreams, and us.",
-        image: "https://placehold.co/600x900/127c71/edfff9?text=The+Intern",
-      },
-    ],
+      "Timeless gems to make our long-distance watch party feel like a cinematic time machine date night.",
+    loadingCopy: "Dusting off the classics just for us…",
   },
-  feelgood: {
-    label: "Comfort binge",
-    loadingCopy: "Stacking up the coziest romcom-comedy blend for a low-stress cuddle over video call.",
+  {
+    id: "comedy",
+    label: "Comedy",
     description:
-      "Soft, feel-good stories with big hearts so we can unwind together and trade favorite quotes.",
-    fallbackDescription:
-      "Serving our ultra-cozy go-tos while the API warms up fresh comfort watches for us.",
-    endpoints: [
-      "https://api.sampleapis.com/movies/romance",
-      "https://api.sampleapis.com/movies/comedy",
-    ],
-    fallback: [
-      {
-        title: "Dil Dhadakne Do (2015)",
-        summary:
-          "A wealthy Punjabi family confronts secrets and relationships while cruising the Mediterranean with friends.",
-        reason:
-          "Family drama plus comedy, all on a luxe cruise – perfect for dreaming up our own getaway.",
-        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=Dil+Dhadakne+Do",
-      },
-      {
-        title: "Notting Hill (1999)",
-        summary:
-          "A bookshop owner falls for a famous actress, leading to gentle humor, mishaps, and tender romance.",
-        reason:
-          "Charming British romcom vibes that feel like a warm hug – ideal for quoting the sweetest lines.",
-        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=Notting+Hill",
-      },
-      {
-        title: "Zindagi Na Milegi Dobara (2011)",
-        summary:
-          "Three friends take a life-changing road trip across Spain, embracing adventure and reconnecting with themselves.",
-        reason:
-          "Feel-good travel inspo with poetry, friendship, and bucket-list energy to share together.",
-        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=ZNMD",
-      },
-      {
-        title: "About Time (2013)",
-        summary:
-          "A man with the ability to travel through time uses his gift to perfect love, family, and life's simple joys.",
-        reason:
-          "Timey-wimey romance that reminds us to savor every ordinary moment we share.",
-        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=About+Time",
-      },
-      {
-        title: "Lunchbox (2013)",
-        summary:
-          "A misdelivered lunchbox sparks an unlikely epistolary friendship between a lonely widower and a neglected housewife.",
-        reason:
-          "Tender storytelling and heartfelt notes – it's basically our long-distance love in film form.",
-        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=Lunchbox",
-      },
-      {
-        title: "Paddington 2 (2017)",
-        summary:
-          "A polite bear in London goes on an adventure to clear his name, spreading kindness wherever he goes.",
-        reason:
-          "Pure serotonin with British humor and heartfelt lessons – great for turning any day into a warm blanket night.",
-        image: "https://placehold.co/600x900/7c3aed/f8f5ff?text=Paddington+2",
-      },
-    ],
+      "Feel-good laughs that keep our call filled with giggles, inside jokes, and screenshot-worthy moments.",
+    loadingCopy: "Hunting for the funniest picks…",
   },
-  mystery: {
-    label: "Mystery & sleuthing",
-    loadingCopy: "Gathering clever mysteries so Detective Saanu & Agent Aloo can solve the case together.",
+  {
+    id: "drama",
+    label: "Drama",
     description:
-      "Whodunits and light thrillers that keep us guessing aloud and comparing theories in our chat.",
-    fallbackDescription:
-      "Calling in our favorite clue-filled picks until the API serves up fresh cases to crack.",
-    endpoints: ["https://api.sampleapis.com/movies/mystery"],
-    fallback: [
-      {
-        title: "Detective Byomkesh Bakshy! (2015)",
-        summary:
-          "Set in 1940s Calcutta, the legendary detective untangles a conspiracy involving Japanese spies and chemical weapons.",
-        reason:
-          "Stylish Hindi mystery with noir vibes – we'll pause to piece clues like a true crime-solving duo.",
-        image: "https://placehold.co/600x900/2f3061/f2f2ff?text=Byomkesh",
-      },
-      {
-        title: "Knives Out (2019)",
-        summary:
-          "Renowned detective Benoit Blanc investigates a family's patriarch's death, exposing secrets with wit and flair.",
-        reason:
-          "Twisty, witty, and perfect for placing friendly bets on the culprit before Benoit Blanc does.",
-        image: "https://placehold.co/600x900/2f3061/f2f2ff?text=Knives+Out",
-      },
-      {
-        title: "Only Murders in the Building (S1)",
-        summary:
-          "Three true-crime fans start a podcast while unraveling a murder in their New York apartment building.",
-        reason:
-          "Bite-sized mystery episodes packed with humor, podcast jokes, and plenty of 'next episode?' energy.",
-        image: "https://placehold.co/600x900/2f3061/f2f2ff?text=OMITB",
-      },
-      {
-        title: "Badla (2019)",
-        summary:
-          "A businesswoman accused of murder seeks help from a veteran lawyer, leading to twisty interrogations and reveals.",
-        reason:
-          "A taut Hindi thriller that's gripping without being gory – ideal for leaning into suspense together.",
-        image: "https://placehold.co/600x900/2f3061/f2f2ff?text=Badla",
-      },
-      {
-        title: "Sherlock (S1)",
-        summary:
-          "A modern-day Sherlock Holmes solves London crimes with Dr. Watson, mixing razor-sharp deductions and wit.",
-        reason:
-          "Brisk mystery episodes perfect for pausing mid-case to trade theories on video call.",
-        image: "https://placehold.co/600x900/2f3061/f2f2ff?text=Sherlock",
-      },
-      {
-        title: "The Afterparty (S1)",
-        summary:
-          "Each episode retells a high-school reunion murder from a different guest's genre-twisted perspective.",
-        reason:
-          "Playful whodunit storytelling that lets us pick favorites and predict the finale together.",
-        image: "https://placehold.co/600x900/2f3061/f2f2ff?text=Afterparty",
-      },
-    ],
+      "Slow-burn stories with big feelings so we can unpack every twist together afterwards.",
+    loadingCopy: "Queuing up the most gripping stories…",
   },
-  thriller: {
-    label: "Gentle thrills",
-    loadingCopy: "Picking the edge-of-seat stories that stay light enough for a cozy night.",
+  {
+    id: "family",
+    label: "Family",
     description:
-      "Tension with a soft landing – thrillers that keep hearts racing but still let us sleep easy afterward.",
-    fallbackDescription:
-      "Swapping in our trusted gentle thrillers until the API restocks this suspenseful lineup.",
-    endpoints: ["https://api.sampleapis.com/movies/thrillers"],
-    fallback: [
-      {
-        title: "Andhadhun (2018)",
-        summary:
-          "A blind pianist becomes entangled in a mysterious murder, forcing him to improvise his way out of danger.",
-        reason:
-          "Dark comedy-thriller goodness with Ayushmann Khurrana – suspenseful yet cheeky for playful commentary.",
-        image: "https://placehold.co/600x900/8c2f39/fff4f4?text=Andhadhun",
-      },
-      {
-        title: "Searching (2018)",
-        summary:
-          "Told entirely through digital screens, a father scours the internet to track down his missing daughter.",
-        reason:
-          "Screen-life thriller told through texts and calls; we'll feel like detectives combing through clues IRL.",
-        image: "https://placehold.co/600x900/8c2f39/fff4f4?text=Searching",
-      },
-      {
-        title: "Ocean's Eight (2018)",
-        summary:
-          "Debbie Ocean recruits a crew of specialists to pull off a dazzling Met Gala jewelry heist.",
-        reason:
-          "Heist glam, strong women, and clever twists that will inspire us to plan our own (legal) adventures.",
-        image: "https://placehold.co/600x900/8c2f39/fff4f4?text=Ocean%27s+8",
-      },
-      {
-        title: "Lupin (S1)",
-        summary:
-          "Gentleman thief Assane Diop masterminds heists inspired by Arsène Lupin to expose a wealthy family's crimes.",
-        reason:
-          "French gentleman thief with Robin Hood charm – stylish, smart, and satisfying in every episode.",
-        image: "https://placehold.co/600x900/8c2f39/fff4f4?text=Lupin",
-      },
-      {
-        title: "Kahaani (2012)",
-        summary:
-          "A pregnant woman arrives in Kolkata searching for her missing husband, uncovering secrets that put her life in danger.",
-        reason:
-          "Gripping yet grounded suspense with Vidya Balan leading the charge – perfect for theory crafting together.",
-        image: "https://placehold.co/600x900/8c2f39/fff4f4?text=Kahaani",
-      },
-      {
-        title: "The Night Manager (2023)",
-        summary:
-          "A former soldier infiltrates an arms dealer's inner circle, balancing espionage with moral dilemmas.",
-        reason:
-          "Stylish spy thrills that stay bingeable without going too dark – we can whisper our favorite twists.",
-        image: "https://placehold.co/600x900/8c2f39/fff4f4?text=Night+Manager",
-      },
-    ],
+      "Wholesome adventures and heartwarming moments perfect for an easy-going call night.",
+    loadingCopy: "Collecting the coziest family picks…",
   },
-};
+  {
+    id: "horror",
+    label: "Horror",
+    description:
+      "Spine-tingling thrills so we can clutch our pillows and pretend we’re brave for each other.",
+    loadingCopy: "Calling in the spooky thrills…",
+  },
+  {
+    id: "mystery",
+    label: "Mystery",
+    description:
+      "Whodunits and puzzles that let us play detective together and trade theories in real time.",
+    loadingCopy: "Following the clues…",
+  },
+  {
+    id: "scifi",
+    label: "Sci‑Fi",
+    description:
+      "Portal-hopping stories that feed our imagination and give us worlds to explore side by side.",
+    loadingCopy: "Charting far-away realms…",
+  },
+  {
+    id: "western",
+    label: "Western",
+    description:
+      "Dusty duels and sprawling adventures when we feel like a stylish throwback vibe.",
+    loadingCopy: "Rounding up the western legends…",
+  },
+];
 
-const CROSSPLAY_GAMES = [
+const GAME_LIBRARY = [
   {
-    title: "Fortnite",
+    title: "It Takes Two",
     summary:
-      "Colorful battle royale chaos with rotating modes, quests, and Zero Build showdowns tailor-made for duo victories.",
-    reason:
-      "Drop into Zero Build duos or Battle Royale and show off our teamwork no matter which screen we're on.",
-    note: "Cross-play: Link our Epic accounts (Xbox gamertag + PC) and invite through the Epic friends list.",
-    aliases: ["Fortnite Battle Royale"],
-    image: createGameArt("Fortnite", {
-      background: "#0ea5e9",
-      accent: "#1d4ed8",
-      emoji: "🛡️",
-    }),
-  },
-  {
-    title: "Rocket League",
-    summary:
-      "High-octane car soccer where rocket-powered vehicles pull off impossible saves and stylish aerial goals.",
-    reason:
-      "Turbo-charge our date night with car soccer chaos — perfect for cheering every goal in party chat.",
-    note: "Cross-play: Enable it in Settings → Gameplay, then create a private match with a shared name & password.",
-    aliases: ["Rocket League®"],
-    image: createGameArt("Rocket League", {
-      background: "#fb7185",
-      accent: "#be123c",
-      emoji: "🚗",
-    }),
-  },
-  {
-    title: "Sea of Thieves",
-    summary:
-      "Open-world pirate adventures filled with treasure hunts, riddles, tall tales, and dramatic ship battles.",
-    reason:
-      "Set sail as a pirate duo, solve riddles, and clink grog mugs while steering the same ship across the waves.",
-    note: "Cross-play: Invite via the Xbox companion app or Xbox Game Bar to drop into the same crew.",
-    aliases: ["Sea of Thieves: 2023 Edition"],
-    image: createGameArt("Sea of Thieves", {
-      background: "#0f766e",
-      accent: "#115e59",
-      emoji: "🏴‍☠️",
-    }),
-  },
-  {
-    title: "Minecraft Dungeons",
-    summary:
-      "Family-friendly dungeon crawler packed with mobs, artifacts, and procedurally generated maps to explore.",
-    reason:
-      "Dive into dungeon-crawling co-op, share loot, and plan our next enchantments together in real time.",
-    note: "Cross-play: Sign in with Microsoft accounts on both sides, then use the in-game friends tab to invite.",
-    aliases: ["Minecraft Dungeons - Ultimate"],
-    image: createGameArt("Minecraft Dungeons", {
-      background: "#ea580c",
-      accent: "#c2410c",
-      emoji: "🗡️",
-    }),
-  },
-  {
-    title: "Overcooked! 2",
-    summary:
-      "Chaotic cooperative cooking where timing, teamwork, and laughter matter more than perfect plating.",
-    reason:
-      "Coordinate our kitchen like pros, yell playful orders, and laugh when the onion soup inevitably catches fire.",
-    note: "Cross-play: Host an online session and turn on cross-platform play from the main menu options.",
-    aliases: ["Overcooked 2"],
-    image: createGameArt("Overcooked! 2", {
-      background: "#f97316",
-      accent: "#facc15",
-      emoji: "🍳",
-    }),
-  },
-  {
-    title: "Fall Guys",
-    summary:
-      "Obstacle-course battle royale featuring whimsical rounds, grabby rivals, and goofy bean avatars.",
-    reason:
-      "Race through obstacle courses as a matching duo and celebrate every crown-worthy near miss together.",
-    note: "Cross-play: Add each other using Epic display names, then squad up from the inviting player's party screen.",
-    aliases: ["Fall Guys: Free for All"],
-    image: createGameArt("Fall Guys", {
-      background: "#ec4899",
-      accent: "#9333ea",
-      emoji: "👑",
-    }),
+      "Swap between wild co-op mechanics as we guide Cody and May through a heartfelt, imaginative adventure.",
+    image:
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co2l2x.jpg",
+    note: "Cross-play via EA App – invite directly from the in-game friends list.",
   },
   {
     title: "Deep Rock Galactic",
     summary:
-      "Procedurally generated caverns, space dwarves, and endless co-op mining missions filled with glowing loot.",
-    reason:
-      "Let's grab our drills, shout 'Rock and Stone,' and carve a new path shoulder-to-shoulder underground.",
-    note: "Cross-play: Join through Xbox/Microsoft accounts — Steam players can use cross-play via the Xbox app on PC.",
-    aliases: ["Deep Rock", "Deep Rock Galactic®"],
-    image: createGameArt("Deep Rock Galactic", {
-      background: "#1e293b",
-      accent: "#0f766e",
-      emoji: "⛏️",
-    }),
+      "Dwarf squad shenanigans, procedurally generated caves, and teamwork that keeps us laughing the whole dig.",
+    image:
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co2e5c.jpg",
+    note: "Cross-play between Xbox and Microsoft Store PC editions – host from either side.",
   },
   {
-    title: "Splitgate",
+    title: "Sea of Thieves",
     summary:
-      "Fast-paced arena shooter where portal tricks meet headshots in neon sci-fi stadiums.",
-    reason:
-      "Perfect for showing off our sneaky portal plays and snappy comms as a cross-play duo.",
-    note: "Cross-play: Link accounts inside the Splitgate menu and invite directly from the in-game friends list.",
-    aliases: ["Splitgate: Arena Warfare", "Splitgate (Beta)", "Split Fiction"],
-    image: createGameArt("Splitgate", {
-      background: "#7c3aed",
-      accent: "#312e81",
-      emoji: "🌀",
-    }),
+      "Sail, sing, and swashbuckle as a pirate duo chasing tall tales, treasure, and cozy sunsets.",
+    image:
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co1s5y.jpg",
+    note: "Full cross-play – crew up by sharing an invite code or Xbox gamertag.",
   },
   {
     title: "Forza Horizon 5",
     summary:
-      "Open-world racing across vibrant Mexico with convoys, expeditions, and seasonal challenges.",
-    reason:
-      "Cruise the coast, race dune buggies, and snap photo mode memories while sharing the same convoy.",
-    note: "Cross-play: Invite via convoy from the pause menu — Xbox and PC drivers share the same festival servers.",
-    aliases: ["Forza Horizon 5 Premium"],
-    image: createGameArt("Forza Horizon 5", {
-      background: "#f97316",
-      accent: "#ef4444",
-      emoji: "🏎️",
-    }),
+      "Road-trip across Mexico with convoys, expeditions, and photo ops to swap in chat afterwards.",
+    image:
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co3w7z.jpg",
+    note: "Cross-play through Xbox Live – jump into each other’s convoy with a single invite.",
   },
   {
     title: "Halo Infinite",
     summary:
-      "Arena and Big Team Battle modes with classic Halo gunplay, grappleshots, and story co-op missions.",
-    reason:
-      "Tag-team the campaign or jump into multiplayer playlists — our comms make every victory sweeter.",
-    note: "Cross-play: Fireteam up from the in-game roster; Xbox, Steam, and Windows players share matchmaking.",
-    aliases: ["Halo Infinite (Campaign)", "Halo Infinite Multiplayer"],
-    image: createGameArt("Halo Infinite", {
-      background: "#1f2937",
-      accent: "#0ea5e9",
-      emoji: "⚔️",
-    }),
+      "Tactical arena bouts and sweeping co-op missions so Team Aloo & Saanu can flex heroic teamwork.",
+    image:
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p7p.jpg",
+    note: "Cross-play matchmaking – party up from the social menu and head straight into action.",
   },
   {
-    title: "Grounded",
+    title: "Minecraft Dungeons",
     summary:
-      "Honey I Shrunk the Kids survival fun with backyard base building, giant insects, and story quests.",
-    reason:
-      "We'll build cozy forts out of clover leaves and fend off spiders together like the tiniest power couple.",
-    note: "Cross-play: Host a shared world from Xbox or PC and invite using Xbox Live gamertags.",
-    aliases: ["Grounded (Game Preview)"],
-    image: createGameArt("Grounded", {
-      background: "#65a30d",
-      accent: "#15803d",
-      emoji: "🐜",
-    }),
+      "Button-mashing dungeon crawling with cute loot and plenty of moments to revive each other.",
+    image:
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co2bqz.jpg",
+    note: "Cross-play enabled – use Microsoft accounts to invite across PC and Xbox.",
   },
   {
-    title: "Destiny 2",
+    title: "Overcooked! 2",
     summary:
-      "Space fantasy looter-shooter with co-op strikes, seasonal stories, and cinematic raids.",
-    reason:
-      "Run strikes, tackle seasonal quests, or just vibe in the Tower while we compare new gear rolls.",
-    note: "Cross-play: Enable Bungie cross-save and use the roster screen to invite across Xbox and PC.",
-    aliases: ["Destiny 2: Lightfall", "Destiny 2 (Free-to-Play)"],
-    image: createGameArt("Destiny 2", {
-      background: "#312e81",
-      accent: "#9333ea",
-      emoji: "🛰️",
-    }),
+      "Chaotic kitchen co-op that lets us yell playful instructions while serving up adorable dishes.",
+    image:
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co1v0f.jpg",
+    note: "Enable cross-platform play in-game to cook together from PC and Xbox.",
+  },
+  {
+    title: "Splitgate",
+    summary:
+      "Portal-flinging arena matches where our quick comms and clever plays shine brightest.",
+    image:
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co22k1.jpg",
+    note: "Cross-play parties – link up via invite code or friends list before hopping into matches.",
   },
 ];
 
-const GAME_CONFIG = {
-  title: "Let's squad up",
-  description:
-    "Every card is vetted for Xbox ↔ Windows cross-play, so Team Aloo & Saanu can jump in together instantly.",
-  fallbackDescription:
-    "Our handpicked cross-play library is ready to roll while we wait on fresh API matches.",
-  endpoints: ["https://api.sampleapis.com/xbox/games"],
-  fallback: CROSSPLAY_GAMES,
-};
+let currentMode = null;
+let activeGenreId = MOVIE_GENRES[0].id;
 
-const state = {
-  choice: null,
-  genre: "any",
-};
+function pickRandomItems(items, count) {
+  const pool = [...items];
+  const selection = [];
+  const maxCount = Math.min(count, pool.length);
 
-const datasetCache = new Map();
-const rotationState = new Map();
+  for (let i = 0; i < maxCount; i += 1) {
+    const index = Math.floor(Math.random() * pool.length);
+    selection.push(pool.splice(index, 1)[0]);
+  }
 
-const CROSSPLAY_LOOKUP = CROSSPLAY_GAMES.reduce((map, game) => {
-  const names = [game.title, ...(game.aliases || [])];
-  names
-    .map((name) => normalizeTitleKey(name))
-    .filter(Boolean)
-    .forEach((key) => {
-      if (!map.has(key)) {
-        map.set(key, game);
-      }
+  return selection;
+}
+
+function setButtonState(mode) {
+  const heroButtons = document.querySelectorAll(".pill-button[data-choice]");
+  heroButtons.forEach((button) => {
+    const isActive = button.dataset.choice === mode;
+    button.classList.toggle("pill-button--active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+}
+
+function renderGenreButtons() {
+  genrePicker.innerHTML = "";
+
+  MOVIE_GENRES.forEach((genre) => {
+    const button = document.createElement("button");
+    button.className = "genre-button";
+    button.type = "button";
+    button.textContent = genre.label;
+    button.dataset.genreId = genre.id;
+    button.setAttribute("aria-pressed", genre.id === activeGenreId ? "true" : "false");
+
+    if (genre.id === activeGenreId) {
+      button.classList.add("genre-button--active");
+    }
+
+    button.addEventListener("click", () => {
+      if (activeGenreId === genre.id) return;
+      activeGenreId = genre.id;
+      updateGenreButtonState();
+      loadMovieSuggestions();
     });
-  return map;
-}, new Map());
 
-function getCacheKey(choice, { genre = "any" } = {}) {
-  return choice === "movie" ? `${choice}-${genre}` : choice;
-}
-
-function shuffle(array) {
-  const clone = [...array];
-  for (let i = clone.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [clone[i], clone[j]] = [clone[j], clone[i]];
-  }
-  return clone;
-}
-
-function normalizeGenres(genre) {
-  if (!genre) return [];
-  const value = Array.isArray(genre) ? genre : `${genre}`.split(",");
-  return value.map((item) => item.trim());
-}
-
-function normalizeTitleKey(value) {
-  return `${value || ""}`
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim();
-}
-
-function normalizeLanguages(language) {
-  if (!language) return [];
-  if (Array.isArray(language)) return language.map((item) => item.trim());
-  return `${language}`
-    .split(/,|\//)
-    .map((item) => item.trim());
-}
-
-function getPlaceholderImage(title, type = "movie") {
-  const size = type === "game" ? "640x360" : "600x900";
-  const palette =
-    type === "game"
-      ? { bg: "0f172a", fg: "e0f2fe" }
-      : { bg: "1f2933", fg: "eff6ff" };
-  const encodedTitle = encodeURIComponent(title || (type === "game" ? "Game" : "Movie"));
-  return `https://placehold.co/${size}/${palette.bg}/${palette.fg}?text=${encodedTitle}`;
-}
-
-function escapeForSvg(text) {
-  return `${text ?? ""}`
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-function createGameArt(
-  title,
-  { background = "#0f172a", accent = "#7c3aed", emoji = "🎮" } = {}
-) {
-  const safeTitle = escapeForSvg(title || "Game night");
-  const safeEmoji = escapeForSvg(emoji || "🎮");
-  const svg = `<?xml version="1.0" encoding="UTF-8"?>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
-      <defs>
-        <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stop-color="${background}" />
-          <stop offset="100%" stop-color="${accent}" />
-        </linearGradient>
-        <radialGradient id="glow" cx="50%" cy="35%" r="65%">
-          <stop offset="0%" stop-color="rgba(255, 255, 255, 0.35)" />
-          <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
-        </radialGradient>
-      </defs>
-      <rect fill="url(#grad)" width="640" height="360" rx="32" />
-      <rect fill="url(#glow)" width="640" height="360" rx="32" />
-      <g font-family="'Quicksand', 'Segoe UI', sans-serif" fill="#ffffff" text-anchor="middle">
-        <text x="320" y="188" font-size="132" opacity="0.9">${safeEmoji}</text>
-        <text x="320" y="272" font-size="44" font-weight="700">${safeTitle}</text>
-        <text x="320" y="314" font-size="22" opacity="0.8">Xbox ↔ PC co-op ready</text>
-      </g>
-    </svg>`;
-
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-}
-
-function resolveImage(item, type) {
-  const candidates = [
-    item?.image,
-    item?.posterURL,
-    item?.posterUrl,
-    item?.poster,
-    item?.img,
-    item?.imageUrl,
-    item?.cover,
-    item?.coverImage,
-  ];
-
-  for (const value of candidates) {
-    if (!value) continue;
-    const normalized = `${value}`.trim();
-    if (!normalized || normalized.toLowerCase() === "n/a") continue;
-    return normalized;
-  }
-
-  return getPlaceholderImage(item?.title || item?.name, type);
-}
-
-function mapToSuggestion(item, fallbackLabel, choice) {
-  const title =
-    item?.title ||
-    item?.name ||
-    item?.game ||
-    item?.showTitle ||
-    item?.shortTitle ||
-    fallbackLabel ||
-    "Untitled";
-
-  const summary =
-    item?.summary ||
-    item?.synopsis ||
-    item?.plot ||
-    item?.overview ||
-    item?.description ||
-    item?.review ||
-    item?.notes ||
-    (item?.genre ? `Genre: ${[].concat(item.genre).join(", ")}` : null) ||
-    (item?.year ? `Released in ${item.year}.` : null) ||
-    "Saving a special spot on our list.";
-
-  const reason =
-    item?.reason ||
-    item?.highlight ||
-    item?.why ||
-    item?.personalNote ||
-    (choice === "movie"
-      ? "Let's see if this matches our mood tonight — I love discovering stories with you."
-      : "Looks like pure co-op fun for Team Aloo & Saanu.");
-
-  const note =
-    item?.note ||
-    item?.notes ||
-    item?.sessionTip ||
-    item?.tip ||
-    item?.crossplayNote ||
-    item?.crossPlayNote ||
-    (item?.crossPlay || item?.crossplay
-      ? `Cross-play info: ${item.crossPlay || item.crossplay}`
-      : null);
-
-  const type = choice === "game" ? "game" : "movie";
-  const image = resolveImage(item, type) || getPlaceholderImage(title, type);
-
-  return { title, summary, reason, note, image, type };
-}
-
-function filterMovies(items, genreKey) {
-  const acceptedLanguages = ["hindi", "english"];
-  const requestedGenre = MOVIE_GENRES[genreKey] ? genreKey : "any";
-
-  return items.filter((item) => {
-    const rating = (item?.rating || item?.rated || "").toUpperCase();
-    if (rating && /(NC-17|R)/.test(rating)) {
-      return false;
-    }
-
-    const languages = normalizeLanguages(item?.language || item?.languages);
-    if (
-      languages.length > 0 &&
-      !languages.some((lang) =>
-        acceptedLanguages.some((accepted) => lang.toLowerCase().includes(accepted))
-      )
-    ) {
-      return false;
-    }
-
-    if (requestedGenre === "any") {
-      return true;
-    }
-
-    const genres = normalizeGenres(item?.genre || item?.genres || item?.categories);
-    if (genres.length === 0) {
-      return true;
-    }
-
-    switch (requestedGenre) {
-      case "romcom":
-        return genres.some((value) => /romance|romantic|rom-com|romcom|love/i.test(value));
-      case "comedy":
-        return genres.some((value) => /comedy/i.test(value));
-      case "feelgood":
-        return genres.some((value) =>
-          /comedy|romance|family|feel[- ]?good|holiday|drama/i.test(value)
-        );
-      case "mystery":
-        return genres.some((value) => /mystery|detective|crime|whodunit/i.test(value));
-      case "thriller":
-        return genres.some((value) => /thriller|suspense|heist|spy/i.test(value));
-      default:
-        return true;
-    }
+    genrePicker.appendChild(button);
   });
 }
 
-function filterGames(items = []) {
-  const matches = new Map();
-
-  items.forEach((item) => {
-    const title =
-      item?.title ||
-      item?.name ||
-      item?.game ||
-      item?.shortTitle ||
-      item?.slug ||
-      item?.id;
-
-    const match = CROSSPLAY_LOOKUP.get(normalizeTitleKey(title));
-    if (match) {
-      matches.set(match.title, match);
-    }
+function updateGenreButtonState() {
+  const buttons = genrePicker.querySelectorAll(".genre-button");
+  buttons.forEach((button) => {
+    const isActive = button.dataset.genreId === activeGenreId;
+    button.classList.toggle("genre-button--active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
   });
-
-  return [...matches.values()];
 }
 
-async function prepareDataset(choice, { genre = "any", reset = false } = {}) {
-  const cacheKey = getCacheKey(choice, { genre });
-  if (reset) {
-    datasetCache.delete(cacheKey);
-    rotationState.delete(cacheKey);
+async function loadMovieSuggestions() {
+  const genre = MOVIE_GENRES.find((item) => item.id === activeGenreId);
+
+  if (!genre) {
+    suggestionsDescription.textContent = "Pick a genre to see what I found for us.";
+    suggestionsGrid.innerHTML = "";
+    return;
   }
 
-  if (datasetCache.has(cacheKey)) {
-    return datasetCache.get(cacheKey);
-  }
-
-  const endpoints =
-    choice === "movie"
-      ? MOVIE_GENRES[genre]?.endpoints || MOVIE_GENRES.any.endpoints
-      : GAME_CONFIG.endpoints;
-  const fallbackSource =
-    choice === "movie"
-      ? MOVIE_GENRES[genre]?.fallback || MOVIE_GENRES.any.fallback
-      : GAME_CONFIG.fallback;
-
-  let primaryItems = [];
-  let fallbackItems = [];
-  let fallbackOnly = true;
+  suggestionsTitle.textContent = "Tonight's watchlist";
+  suggestionsDescription.textContent = genre.loadingCopy;
+  refreshButton.hidden = false;
+  refreshButton.disabled = true;
+  refreshButton.textContent = "Loading…";
 
   try {
-    const results = await Promise.all(
-      endpoints.map(async (endpoint) => {
-        const response = await fetch(endpoint);
-        if (!response.ok) {
-          throw new Error(`Request failed: ${response.status}`);
-        }
-        return response.json();
-      })
-    );
+    const response = await fetch(`${MOVIE_API_BASE}/${genre.id}`);
 
-    const flattened = results.flat();
-    if (Array.isArray(flattened) && flattened.length > 0) {
-      const filtered =
-        choice === "movie"
-          ? filterMovies(flattened, genre)
-          : filterGames(flattened);
-
-      if (filtered.length > 0) {
-        primaryItems = shuffle(filtered);
-        fallbackOnly = false;
-      }
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
     }
+
+    const data = await response.json();
+    const cleaned = data.filter((item) => {
+      if (!item?.title) return false;
+
+      const poster = item?.posterURL || item?.posterUrl || item?.poster;
+      if (!poster || poster === "N/A") return false;
+
+      return true;
+    });
+
+    const selection = pickRandomItems(cleaned, SUGGESTION_COUNT);
+
+    suggestionsDescription.textContent = genre.description;
+    suggestionsGrid.innerHTML = "";
+
+    if (selection.length === 0) {
+      const emptyState = document.createElement("p");
+      emptyState.className = "suggestions__empty";
+      emptyState.textContent = "No titles popped up for that genre right now. Try a different vibe or tap refresh.";
+      suggestionsGrid.appendChild(emptyState);
+      return;
+    }
+
+    selection.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "suggestion-card";
+      card.setAttribute("role", "listitem");
+      card.dataset.suggestionType = "movie";
+
+      const media = document.createElement("div");
+      media.className = "suggestion-card__media";
+      const image = document.createElement("img");
+      image.loading = "lazy";
+      image.src = item.posterURL || item.posterUrl || item.poster;
+      image.alt = `${item.title} poster`;
+      media.appendChild(image);
+
+      const body = document.createElement("div");
+      body.className = "suggestion-card__body";
+
+      const title = document.createElement("h3");
+      title.textContent = item.title;
+      body.appendChild(title);
+
+      const metaBits = [];
+      if (item.year) metaBits.push(item.year);
+      if (item.runtime) metaBits.push(`${item.runtime} mins`);
+
+      const director = item.director || item.directors;
+      if (director) {
+        metaBits.push(`Director: ${Array.isArray(director) ? director.join(", ") : director}`);
+      }
+
+      const metaText = metaBits.join(" • ");
+
+      if (metaText) {
+        const meta = document.createElement("p");
+        meta.className = "suggestion-card__meta";
+        meta.textContent = metaText;
+        body.appendChild(meta);
+      }
+
+      const summary = document.createElement("p");
+      summary.className = "suggestion-card__summary";
+      const summaryText =
+        (typeof item.plot === "string" && item.plot.trim()) ||
+        (typeof item.description === "string" && item.description.trim()) ||
+        (typeof item.overview === "string" && item.overview.trim()) ||
+        "Let's find out what makes this one special together.";
+      summary.textContent = summaryText;
+
+      body.appendChild(summary);
+
+      card.appendChild(media);
+      card.appendChild(body);
+      suggestionsGrid.appendChild(card);
+    });
   } catch (error) {
-    console.warn("Falling back to offline suggestions", error);
+    suggestionsGrid.innerHTML = "";
+    const errorMessage = document.createElement("p");
+    errorMessage.className = "suggestions__error";
+    errorMessage.textContent = "I couldn't load that genre right now. Let's try again in a moment or pick another one.";
+    suggestionsGrid.appendChild(errorMessage);
+    console.error(error);
+  } finally {
+    refreshButton.disabled = false;
+    refreshButton.textContent = "Show me different ideas";
   }
-
-  if (choice === "movie") {
-    fallbackItems = shuffle([...(fallbackSource || [])]);
-  } else {
-    const usedKeys = new Set(
-      primaryItems.map((item) => normalizeTitleKey(item?.title || item?.name))
-    );
-    const curatedPool = GAME_CONFIG.fallback.filter(
-      (game) => !usedKeys.has(normalizeTitleKey(game.title))
-    );
-    const basePool = curatedPool.length > 0 ? curatedPool : GAME_CONFIG.fallback;
-    fallbackItems = shuffle([...basePool]);
-    if (primaryItems.length === 0) {
-      fallbackOnly = true;
-    }
-  }
-
-  const dataset = { primaryItems, fallbackItems, fallbackOnly };
-  datasetCache.set(cacheKey, dataset);
-  return dataset;
 }
 
-function selectSuggestions(choice, { genre = "any" } = {}, dataset) {
-  const amount = SUGGESTION_COUNT;
-  const fallbackLabel = choice === "movie" ? MOVIE_GENRES[genre]?.label : undefined;
-  const suggestions = [];
-  const seenTitles = new Set();
-  let fallbackUsed = dataset?.fallbackOnly ?? false;
+function loadGameSuggestions() {
+  suggestionsTitle.textContent = "Tonight's game queue";
+  suggestionsDescription.textContent =
+    "Every pick keeps Xbox and Windows PC cross-play ready so we can jump in together instantly.";
+  genrePicker.hidden = true;
 
-  const rotationKey = getCacheKey(choice, { genre });
-  const primaryItems = Array.isArray(dataset?.primaryItems)
-    ? dataset.primaryItems
-    : [];
-  const fallbackItems = Array.isArray(dataset?.fallbackItems)
-    ? dataset.fallbackItems
-    : [];
-
-  let state = rotationState.get(rotationKey);
-  if (!state) {
-    state = {
-      primaryIndex: primaryItems.length
-        ? Math.floor(Math.random() * primaryItems.length)
-        : 0,
-      fallbackIndex: fallbackItems.length
-        ? Math.floor(Math.random() * fallbackItems.length)
-        : 0,
-    };
-  }
-
-  const tryAdd = (item, useFallback = false) => {
-    if (!item) return false;
-    const suggestion = mapToSuggestion(item, fallbackLabel, choice);
-    const key = normalizeTitleKey(suggestion.title);
-    if (!key || seenTitles.has(key)) {
-      return false;
-    }
-    seenTitles.add(key);
-    if (useFallback) {
-      fallbackUsed = true;
-    }
-    suggestions.push(suggestion);
-    return true;
-  };
-
-  const computeAdvance = (added, length) => {
-    if (!length) return 0;
-    if (added <= 0) {
-      return Math.min(1, length);
-    }
-    const step = Math.min(added, amount, length);
-    return step === length ? 1 : step;
-  };
-
-  if (primaryItems.length) {
-    let added = 0;
-    for (
-      let steps = 0;
-      steps < primaryItems.length && suggestions.length < amount;
-      steps += 1
-    ) {
-      const index = (state.primaryIndex + steps) % primaryItems.length;
-      if (tryAdd(primaryItems[index], false)) {
-        added += 1;
-      }
-    }
-    const advance = computeAdvance(added, primaryItems.length);
-    state.primaryIndex = (state.primaryIndex + advance) % primaryItems.length;
-  }
-
-  if (suggestions.length < amount && fallbackItems.length) {
-    let added = 0;
-    for (
-      let steps = 0;
-      steps < fallbackItems.length && suggestions.length < amount;
-      steps += 1
-    ) {
-      const index = (state.fallbackIndex + steps) % fallbackItems.length;
-      if (tryAdd(fallbackItems[index], true)) {
-        added += 1;
-      }
-    }
-    const advance = computeAdvance(added, fallbackItems.length);
-    state.fallbackIndex = (state.fallbackIndex + advance) % fallbackItems.length;
-  }
-
-  if (suggestions.length === 0) {
-    tryAdd(
-      {
-        title:
-          fallbackLabel || (choice === "movie" ? "Movie night standby" : "Game night standby"),
-        summary: "Saving a special spot on our list while the API catches up.",
-        reason:
-          choice === "movie"
-            ? "Let's treat this as a rain check and refresh for fresh picks together."
-            : "Hit refresh for new quests or pick from our cross-play library anytime.",
-        image: getPlaceholderImage(
-          fallbackLabel || (choice === "movie" ? "Movie" : "Game"),
-          choice === "game" ? "game" : "movie"
-        ),
-      },
-      true
-    );
-  }
-
-  rotationState.set(rotationKey, state);
-  return { suggestions, fallbackUsed };
-}
-
-function renderSuggestions(items) {
+  const selection = pickRandomItems(GAME_LIBRARY, SUGGESTION_COUNT);
   suggestionsGrid.innerHTML = "";
-  items.forEach(({ title, summary, reason, note, image, type }) => {
+
+  selection.forEach((item) => {
     const card = document.createElement("article");
     card.className = "suggestion-card";
     card.setAttribute("role", "listitem");
-    card.dataset.suggestionType = type;
+    card.dataset.suggestionType = "game";
 
-    const media = document.createElement("figure");
+    const media = document.createElement("div");
     media.className = "suggestion-card__media";
-
-    const img = document.createElement("img");
-    img.src = image;
-    img.alt = `${title} artwork`;
-    img.loading = "lazy";
-    media.appendChild(img);
-    card.appendChild(media);
+    const image = document.createElement("img");
+    image.loading = "lazy";
+    image.src = item.image;
+    image.alt = `${item.title} cover art`;
+    media.appendChild(image);
 
     const body = document.createElement("div");
     body.className = "suggestion-card__body";
 
-    const heading = document.createElement("h3");
-    heading.textContent = title;
-    body.appendChild(heading);
+    const title = document.createElement("h3");
+    title.textContent = item.title;
 
-    if (summary) {
-      const summaryEl = document.createElement("p");
-      summaryEl.className = "suggestion-card__summary";
-      summaryEl.textContent = summary;
-      body.appendChild(summaryEl);
-    }
+    const summary = document.createElement("p");
+    summary.className = "suggestion-card__summary";
+    summary.textContent = item.summary;
 
-    if (reason) {
-      const reasonEl = document.createElement("p");
-      reasonEl.className = "suggestion-card__reason";
-      reasonEl.textContent = reason;
-      body.appendChild(reasonEl);
-    }
+    const note = document.createElement("p");
+    note.className = "suggestion-card__note";
+    note.textContent = item.note;
 
-    if (note) {
-      const noteEl = document.createElement("p");
-      noteEl.className = "suggestion-card__note";
-      noteEl.textContent = note;
-      body.appendChild(noteEl);
-    }
+    body.appendChild(title);
+    body.appendChild(summary);
+    body.appendChild(note);
 
+    card.appendChild(media);
     card.appendChild(body);
     suggestionsGrid.appendChild(card);
   });
+
+  refreshButton.hidden = GAME_LIBRARY.length <= SUGGESTION_COUNT;
+  refreshButton.disabled = false;
+  refreshButton.textContent = "Show me different ideas";
 }
 
-function updateGenreButtons(activeKey) {
-  if (!genrePicker) return;
-  [...genrePicker.querySelectorAll("button")].forEach((button) => {
-    const isActive = button.dataset.genre === activeKey;
-    button.setAttribute("aria-pressed", String(isActive));
-    button.classList.toggle("genre-button--active", isActive);
-  });
-}
-
-async function loadSuggestions(choice, { genre = "any", resetCache = false } = {}) {
-  const isMovie = choice === "movie";
-  const loadingCopy = isMovie
-    ? MOVIE_GENRES[genre]?.loadingCopy || MOVIE_GENRES.any.loadingCopy
-    : "Finding the best co-op quests for Team Aloo & Saanu.";
-
-  suggestionsDescription.textContent = loadingCopy;
-  suggestionsGrid.innerHTML = "";
-  refreshButton.hidden = true;
-  if (!refreshButton.hasAttribute("hidden")) {
-    refreshButton.setAttribute("hidden", "");
-  }
-
-  try {
-    const dataset = await prepareDataset(choice, { genre, reset: resetCache });
-    const { suggestions, fallbackUsed } = selectSuggestions(choice, { genre }, dataset);
-    renderSuggestions(suggestions);
-
-    const config = isMovie
-      ? MOVIE_GENRES[genre] || MOVIE_GENRES.any
-      : GAME_CONFIG;
-
-    const descriptionCopy = fallbackUsed
-      ? config?.fallbackDescription ||
-        (isMovie
-          ? "I pulled from our personal watchlist while the API catches up."
-          : "Serving our trusted cross-play picks while waiting on new matches.")
-      : config?.description ||
-        (isMovie
-          ? MOVIE_GENRES.any.description
-          : GAME_CONFIG.description);
-
-    suggestionsDescription.textContent = descriptionCopy;
-    refreshButton.hidden = false;
-    refreshButton.removeAttribute("hidden");
-    refreshButton.dataset.choice = choice;
-    if (isMovie) {
-      refreshButton.dataset.genre = genre;
-    } else {
-      delete refreshButton.dataset.genre;
-    }
-  } catch (error) {
-    console.error("Unable to load suggestions", error);
-    suggestionsDescription.textContent =
-      "I couldn't fetch new ideas right now, but I left a few of my personal favorites below.";
-  }
-}
-
-function showGenrePicker() {
-  if (!genrePicker) return;
-  genrePicker.hidden = false;
-  genrePicker.removeAttribute("hidden");
-  genrePicker.style.removeProperty("display");
-  genrePicker.removeAttribute("aria-hidden");
-
-  if (genrePicker.childElementCount === 0) {
-    Object.entries(MOVIE_GENRES).forEach(([key, config]) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "genre-button";
-      button.dataset.genre = key;
-      button.textContent = config.label;
-      button.setAttribute("aria-pressed", "false");
-      button.addEventListener("click", () => {
-        if (state.genre === key) {
-          loadSuggestions("movie", { genre: key, resetCache: true });
-          return;
-        }
-        state.genre = key;
-        updateGenreButtons(key);
-        loadSuggestions("movie", { genre: key, resetCache: true });
-      });
-      genrePicker.appendChild(button);
-    });
-  }
-
-  updateGenreButtons(state.genre);
-}
-
-function hideGenrePicker() {
-  if (!genrePicker) return;
-  genrePicker.hidden = true;
-  if (!genrePicker.hasAttribute("hidden")) {
-    genrePicker.setAttribute("hidden", "");
-  }
-  genrePicker.style.display = "none";
-  genrePicker.setAttribute("aria-hidden", "true");
-}
-
-async function handleChoice(choice) {
-  state.choice = choice;
-
-  if (choice === "movie") {
-    if (!MOVIE_GENRES[state.genre]) {
-      state.genre = "any";
-    }
-    showGenrePicker();
-    suggestionsTitle.textContent = "Movie magic for my Saanu";
-    invitationTitle.textContent = "Movie night coming up, Saanu!";
-    invitationMessage.textContent =
-      "I'll sync the stream from here while you grab the coziest blanket. Let's pick what we're watching.";
-  } else {
-    hideGenrePicker();
-    suggestionsTitle.textContent = "Game night loadout";
-    invitationTitle.textContent = "Controller batteries? Charged!";
-    invitationMessage.textContent =
-      "I'll set up the lobby and drop the invite in our chat. Choose the mission that sounds most fun tonight.";
-  }
-
+function setMode(mode) {
+  if (currentMode === mode) return;
+  currentMode = mode;
+  setButtonState(mode);
   suggestionsSection.hidden = false;
-  suggestionsSection.removeAttribute("hidden");
+  suggestionsGrid.innerHTML = "";
+  refreshButton.hidden = false;
+  refreshButton.disabled = false;
+  refreshButton.textContent = "Show me different ideas";
 
-  const genre = choice === "movie" ? state.genre : undefined;
-  await loadSuggestions(choice, { genre });
+  if (mode === "movie") {
+    genrePicker.hidden = false;
+    renderGenreButtons();
+    loadMovieSuggestions();
+  } else if (mode === "game") {
+    loadGameSuggestions();
+  }
+
+  invitationTitle.textContent =
+    mode === "movie" ? "Let’s press play together" : "Ready to dive into game night?";
+  invitationMessage.textContent =
+    mode === "movie"
+      ? "Pick a genre and I’ll queue a fresh batch of films for us to stream side by side."
+      : "Here’s our cross-play friendly lineup so we can squad up without any fuss.";
 }
 
-function setupEventListeners() {
-  document.querySelectorAll(".pill-button[data-choice]").forEach((button) => {
-    button.addEventListener("click", () => handleChoice(button.dataset.choice));
-  });
+refreshButton.addEventListener("click", () => {
+  if (currentMode === "movie") {
+    loadMovieSuggestions();
+  } else if (currentMode === "game") {
+    loadGameSuggestions();
+  }
+});
 
-  refreshButton.addEventListener("click", async () => {
-    const choice = refreshButton.dataset.choice;
-    if (!choice) return;
-    const genre = refreshButton.dataset.genre || state.genre;
-    await loadSuggestions(choice, { genre, resetCache: true });
-  });
-}
+document.querySelectorAll(".pill-button[data-choice]").forEach((button) => {
+  button.addEventListener("click", () => setMode(button.dataset.choice));
+});
 
-setupEventListeners();
+// Default to movie mode on load so the genre chips are ready to go.
+setMode("movie");
