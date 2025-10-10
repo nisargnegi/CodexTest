@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Long-Distance Date Night</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=7" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Hey Saanu 💛</p>
+      <h1 class="hero__title">Can we plan a long-distance date night?</h1>
+      <p class="hero__subtitle">It's me, your Aloo, with a menu of films and games so we can laugh, sleuth, and press start together even when we're miles apart.</p>
+      <div class="hero__actions">
+        <button class="pill-button" data-choice="movie">🎬 Movie Night</button>
+        <button class="pill-button" data-choice="game">🎮 Co-op Game Night</button>
+      </div>
+      <p class="hero__note">Pick a vibe and I'll handle the setup — snacks, stream, and controller batteries included.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="invitation" aria-live="polite">
+      <h2 id="invitation-title">Choose our vibe to see what's in store</h2>
+      <p id="invitation-message">Click one of the buttons above to see what I planned for us tonight.</p>
+    </section>
+
+    <section class="suggestions" hidden>
+      <div class="suggestions__header">
+        <h2 id="suggestions-title">Tonight's watchlist</h2>
+        <p id="suggestions-description">Loading a few handpicked favorites just for us…</p>
+        <div class="genre-picker" id="genre-picker" hidden aria-label="Choose our movie genre" role="group"></div>
+      </div>
+      <div class="suggestions__grid" id="suggestions-grid" role="list"></div>
+      <button class="pill-button pill-button--secondary" id="refresh-button" hidden>Show me different ideas</button>
+    </section>
+
+    <section class="after-plan">
+      <h2>After the credits roll…</h2>
+      <ul>
+        <li><span>💬</span> Share the funniest or most heart-fluttering moment and why it made us think of each other.</li>
+        <li><span>🎧</span> Queue a mini playlist and have an impromptu karaoke session over our call.</li>
+        <li><span>🍨</span> Order each other surprise desserts and unbox them together.</li>
+        <li><span>📝</span> Jot down a few “Next time we meet” plans so we have something to look forward to.</li>
+      </ul>
+    </section>
+
+    <section class="tech-plan">
+      <h2>How we'll make it happen</h2>
+      <ol>
+        <li><strong>Movie night:</strong> Start a Teleparty/Watch Together, count down, and press play at the same time.</li>
+        <li><strong>Game night:</strong> I'll host the PC/Xbox cross-play session and share the invite code with you.</li>
+        <li><strong>Chat:</strong> Hop on our usual call, keep the vibes cozy, and enjoy the night.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made with all my love, always yours — Aloo. ✨</p>
+  </footer>
+
+  <script src="script.js?v=7" type="module"></script>
+</body>
+</html>
