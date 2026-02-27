@@ -1,0 +1,502 @@
+{
+  "action-adventure": [
+    {
+      "title": "Mad Max: Fury Road",
+      "year": 2015,
+      "runtime": 120,
+      "director": "George Miller",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwZjMyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+      "summary": "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners, a psychotic worshiper, and a drifter named Max."
+    },
+    {
+      "title": "Inception",
+      "year": 2010,
+      "runtime": 148,
+      "director": "Christopher Nolan",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+      "summary": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."
+    },
+    {
+      "title": "Black Panther",
+      "year": 2018,
+      "runtime": 134,
+      "director": "Ryan Coogler",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SX300.jpg",
+      "summary": "T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past."
+    },
+    {
+      "title": "The Dark Knight",
+      "year": 2008,
+      "runtime": 152,
+      "director": "Christopher Nolan",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+      "summary": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
+    },
+    {
+      "title": "Dune: Part One",
+      "year": 2021,
+      "runtime": 155,
+      "director": "Denis Villeneuve",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BN2FjNmEyNWMtYzM0ZS00NjIyLTg5YzYtYThlMGJkYzIyY2gwXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+      "summary": "A noble family becomes embroiled in a war for control over the galaxy's most valuable asset while its heir becomes troubled by visions of a dark future."
+    },
+    {
+      "title": "Mission: Impossible - Fallout",
+      "year": 2018,
+      "runtime": 147,
+      "director": "Christopher McQuarrie",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNjRlZDT1ZvEtZGIxYy00NTgwLTgxNmMtMTQzETZmJTE2NjJlXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg",
+      "summary": "Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong."
+    }
+  ],
+  "animation": [
+    {
+      "title": "Spider-Man: Into the Spider-Verse",
+      "year": 2018,
+      "runtime": 117,
+      "director": "Bob Persichetti, Peter Ramsey, Rodney Rothman",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_SX300.jpg",
+      "summary": "Teen Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities."
+    },
+    {
+      "title": "Spirited Away",
+      "year": 2001,
+      "runtime": 125,
+      "director": "Hayao Miyazaki",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+      "summary": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts."
+    },
+    {
+      "title": "The Lion King",
+      "year": 1994,
+      "runtime": 88,
+      "director": "Roger Allers, Rob Minkoff",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_SX300.jpg",
+      "summary": "Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself."
+    },
+    {
+      "title": "Toy Story",
+      "year": 1995,
+      "runtime": 81,
+      "director": "John Lasseter",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMDU2ZWJlMjktMTRhMy00ZTA5LWEzNDgtYmNmZTEwZTViZWJkXkEyXkFqcGdeQXVyNDQ2OTk4MzI@._V1_SX300.jpg",
+      "summary": "A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy's room."
+    },
+    {
+      "title": "Inside Out",
+      "year": 2015,
+      "runtime": 95,
+      "director": "Pete Docter",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BOTgxMDQwMDk0OF5BMl5BanBnXkFtZTgwNjU5OTg2NDE@._V1_SX300.jpg",
+      "summary": "After young Riley is uprooted from her Midwest life and moved to San Francisco, her emotions - Joy, Fear, Anger, Disgust and Sadness - conflict on how best to navigate a new city, house, and school."
+    },
+    {
+      "title": "Coco",
+      "year": 2017,
+      "runtime": 105,
+      "director": "Lee Unkrich",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BYjQ5NjM0Y2YtNjZkNC00ZDhkLWJjMWItN2QyNzFkMDE3ZjAxXkEyXkFqcGdeQXVyODIxMzk5NjA@._V1_SX300.jpg",
+      "summary": "Aspiring musician Miguel, confronted with his family's ancestral ban on music, enters the Land of the Dead to find his great-great-grandfather, a legendary singer."
+    }
+  ],
+  "classic": [
+    {
+      "title": "Casablanca",
+      "year": 1942,
+      "runtime": 102,
+      "director": "Michael Curtiz",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BYjUyZWZkM2UtMzYxYy00ZmQ3LWFmZTQtOGE2YjBkNjdnYTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "summary": "A cynical expatriate American cafe owner struggles to decide whether or not to help his former lover and her fugitive husband escape the Nazis in French Morocco."
+    },
+    {
+      "title": "The Godfather",
+      "year": 1972,
+      "runtime": 175,
+      "director": "Francis Ford Coppola",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "summary": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son."
+    },
+    {
+      "title": "12 Angry Men",
+      "year": 1957,
+      "runtime": 96,
+      "director": "Sidney Lumet",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMWU4N2FjNzYtNTVkNC00NzQ0LTg0MjAtYTJlMjFhNGUxZDFmXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg",
+      "summary": "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict."
+    },
+    {
+      "title": "Schindler's List",
+      "year": 1993,
+      "runtime": 195,
+      "director": "Steven Spielberg",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+      "summary": "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis."
+    },
+    {
+      "title": "Pulp Fiction",
+      "year": 1994,
+      "runtime": 154,
+      "director": "Quentin Tarantino",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "summary": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
+    },
+    {
+      "title": "Fight Club",
+      "year": 1999,
+      "runtime": 139,
+      "director": "David Fincher",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "summary": "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more."
+    }
+  ],
+  "comedy": [
+    {
+      "title": "Superbad",
+      "year": 2007,
+      "runtime": 113,
+      "director": "Greg Mottola",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMTc0NjIyMjA2OF5BMl5BanBnXkFtZTcwMzIxNDE1MQ@@._V1_SX300.jpg",
+      "summary": "Two co-dependent high school seniors are forced to deal with separation anxiety after their plan to stage a booze-soaked party goes awry."
+    },
+    {
+      "title": "The Hangover",
+      "year": 2009,
+      "runtime": 100,
+      "director": "Todd Phillips",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNGQwZjg5YmYtY2VkNC00NzliLTljYTctNzI5NmU3MjE2ODQzXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "summary": "Three buddies wake up from a bachelor party in Las Vegas, with no memory of the previous night and the bachelor missing. They make their way around the city in order to find their friend before his wedding."
+    },
+    {
+      "title": "Step Brothers",
+      "year": 2008,
+      "runtime": 98,
+      "director": "Adam McKay",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BODViZDg3ZjYtMzlhZgw0ZDFiLWE2YWUtOTE2ODTEZDY2NzBmXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg",
+      "summary": "Two aimless middle-aged losers still living at home are forced against their will to become roommates when their parents marry."
+    },
+    {
+      "title": "Mean Girls",
+      "year": 2004,
+      "runtime": 97,
+      "director": "Mark Waters",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjE1MDQ3NzI1MF5BMl5BanBnXkFtZTcwMDEyNTc0NA@@._V1_SX300.jpg",
+      "summary": "Cady Heron is a hit with The Plastics, the A-list girl clique at her new school, until she makes the mistake of falling for Aaron Samuels, the ex-boyfriend of alpha Plastic Regina George."
+    },
+    {
+      "title": "Bridesmaids",
+      "year": 2011,
+      "runtime": 125,
+      "director": "Paul Feig",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjAyOTMyMzUxNl5BMl5BanBnXkFtZTcwODI4MzE0NA@@._V1_SX300.jpg",
+      "summary": "Competition between the maid of honor and a bridesmaid, over who is the bride's best friend, threatens to upend the life of an out-of-work pastry chef."
+    },
+    {
+      "title": "Dumb and Dumber",
+      "year": 1994,
+      "runtime": 107,
+      "director": "Peter Farrelly",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BZDQwMjNiMTQtY2UwYy00NjhiLTk0ZWEtZWM5ZWMzNGFjNTVkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      "summary": "After a woman leaves a briefcase at the airport terminal, a dumb limo driver and his dumber friend set out on a hilarious cross-country road trip to Aspen to return it."
+    }
+  ],
+  "drama": [
+    {
+      "title": "The Shawshank Redemption",
+      "year": 1994,
+      "runtime": 142,
+      "director": "Frank Darabont",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_SX300.jpg",
+      "summary": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
+    },
+    {
+      "title": "Forrest Gump",
+      "year": 1994,
+      "runtime": 142,
+      "director": "Robert Zemeckis",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      "summary": "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart."
+    },
+    {
+      "title": "Good Will Hunting",
+      "year": 1997,
+      "runtime": 126,
+      "director": "Gus Van Sant",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      "summary": "Will Hunting, a janitor at M.I.T., has a gift for mathematics, but needs help from a psychologist to find direction in his life."
+    },
+    {
+      "title": "Parasite",
+      "year": 2019,
+      "runtime": 132,
+      "director": "Bong Joon Ho",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg",
+      "summary": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan."
+    },
+    {
+      "title": "A Star Is Born",
+      "year": 2018,
+      "runtime": 136,
+      "director": "Bradley Cooper",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNmE5ZmE3OGItNTdlNC00YmMxLWEzNjctYzAwOGQ5ODg0OTI0XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+      "summary": "A musician helps a young singer find fame as age and alcoholism send his own career into a downward spiral."
+    },
+    {
+      "title": "Moonlight",
+      "year": 2016,
+      "runtime": 111,
+      "director": "Barry Jenkins",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNzQxNTIyODAxMV5BMl5BanBnXkFtZTgwNzQyMDA3OTE@._V1_SX300.jpg",
+      "summary": "A young African-American man grapples with his identity and sexuality while experiencing the everyday struggles of childhood, adolescence, and burgeoning adulthood."
+    }
+  ],
+  "family": [
+    {
+      "title": "Paddington 2",
+      "year": 2017,
+      "runtime": 103,
+      "director": "Paul King",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMmExY2M2YzItNzQ0Yy00OGI4LTg5NDktOTE2MzNhMzgzYjkwXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_SX300.jpg",
+      "summary": "Paddington, now happily settled with the Brown family and a popular member of the local community, picks up a series of odd jobs to buy the perfect present for his Aunt Lucy's 100th birthday, only for the gift to be stolen."
+    },
+    {
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "year": 2001,
+      "runtime": 152,
+      "director": "Chris Columbus",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNjQ3NWNlNmQtMTE5ZS00MDdmLTlkZjUtZTBlM2UxMGFiMTU3XkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg",
+      "summary": "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world."
+    },
+    {
+      "title": "The Princess Bride",
+      "year": 1987,
+      "runtime": 98,
+      "director": "Rob Reiner",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BBGM4YmY2MTQtOTc0MC00MjRmLTk5MTEtMmI4NThlZDUwZTUxXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      "summary": "A bedridden boy's grandfather reads him the story of a farmboy-turned-pirate who encounters numerous obstacles, enemies and allies in his quest to be reunited with his true love."
+    },
+    {
+      "title": "Finding Nemo",
+      "year": 2003,
+      "runtime": 100,
+      "director": "Andrew Stanton",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BZTAzNWZlNmUtZDEzYi00ZjA5LWIwYjEtZGM1NWE1MjE4YWRhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+      "summary": "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home."
+    },
+    {
+      "title": "E.T. the Extra-Terrestrial",
+      "year": 1982,
+      "runtime": 115,
+      "director": "Steven Spielberg",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMTQ2ODFlMDAtNzdhOC00NDUyLTgxM2MtODIyZGI5NmJYVEZiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg",
+      "summary": "A troubled child summons the courage to help a friendly alien escape Earth and return to his home world."
+    },
+    {
+      "title": "Mary Poppins",
+      "year": 1964,
+      "runtime": 139,
+      "director": "Robert Stevenson",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNmU1MTZkMjYtM2JjZS00ODMzLTgwZmEtOTk1YjYyNzBiZWE4XkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg",
+      "summary": "In turn of the century London, a magical nanny employs music and adventure to help two neglected children become closer to their father."
+    }
+  ],
+  "horror": [
+    {
+      "title": "The Shining",
+      "year": 1980,
+      "runtime": 146,
+      "director": "Stanley Kubrick",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BZWFlYmY2MGEtZjVkYS00YzU4LTg0YjQtYzY1ZGE3NTA5NGQxXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      "summary": "A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence, while his psychic son sees horrific forebodings from the past and of the future."
+    },
+    {
+      "title": "Get Out",
+      "year": 2017,
+      "runtime": 104,
+      "director": "Jordan Peele",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjUxMDQwNzIxNl5BMl5BanBnXkFtZTgwMTMwMTY0OTE@._V1_SX300.jpg",
+      "summary": "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point."
+    },
+    {
+      "title": "A Quiet Place",
+      "year": 2018,
+      "runtime": 90,
+      "director": "John Krasinski",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_SX300.jpg",
+      "summary": "In a post-apocalyptic world, a family is forced to live in silence while hiding from monsters with ultra-sensitive hearing."
+    },
+    {
+      "title": "Hereditary",
+      "year": 2018,
+      "runtime": 127,
+      "director": "Ari Aster",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BOTU5MDg3OGItZWQ1Ny00ZTZlLThlYjQtYWEwZTE0NjUyYzlkXkEyXkFqcGdeQXVyNzYzMzg0Mzc@._V1_SX300.jpg",
+      "summary": "A grieving family is haunted by tragic and disturbing occurrences."
+    },
+    {
+      "title": "The Conjuring",
+      "year": 2013,
+      "runtime": 112,
+      "director": "James Wan",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_SX300.jpg",
+      "summary": "Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse."
+    },
+    {
+      "title": "It",
+      "year": 2017,
+      "runtime": 135,
+      "director": "Andy Muschietti",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BZDVkZmI0YzAtNzdjYi00ZjhhLWE1ODEtMWMzMWMzNDA0NmQ4XkEyXkFqcGdeQXVyNzYzMzg0Mzc@._V1_SX300.jpg",
+      "summary": "In the summer of 1989, a group of bullied kids band together to destroy a shape-shifting monster, which disguises itself as a clown and preys on the children of Derry, their small Maine town."
+    }
+  ],
+  "mystery": [
+    {
+      "title": "Knives Out",
+      "year": 2019,
+      "runtime": 130,
+      "director": "Rian Johnson",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMGUwZjODMTmtOTI1MS00YjRiLTg0YmYtNTNhNzNjMjA4NGUxXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
+      "summary": "A detective investigates the death of a patriarch of an eccentric, combative family."
+    },
+    {
+      "title": "Se7en",
+      "year": 1995,
+      "runtime": 127,
+      "director": "David Fincher",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BOTUwODM5MTctZjczMi00OTk4LTg3NWUtNmVhMTAzNTNjYjcyXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+      "summary": "Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives."
+    },
+    {
+      "title": "Gone Girl",
+      "year": 2014,
+      "runtime": 149,
+      "director": "David Fincher",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMTk0MDQ3MzAzOV5BMl5BanBnXkFtZTgwNzU1NzE3MjE@._V1_SX300.jpg",
+      "summary": "With his wife's disappearance having become the focus of an intense media circus, a man sees the spotlight turned on him when it's suspected that he may not be innocent."
+    },
+    {
+      "title": "Shutter Island",
+      "year": 2010,
+      "runtime": 138,
+      "director": "Martin Scorsese",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BYzhjBI00YjItNzUyNS00ZDQ5LTg2YjAtZjE0OTkwZWRjN2ZlXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+      "summary": "In 1954, a U.S. Marshal investigates the disappearance of a murderer who escaped from a hospital for the criminally insane."
+    },
+    {
+      "title": "Prisoners",
+      "year": 2013,
+      "runtime": 153,
+      "director": "Denis Villeneuve",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMTg0NTIzMjQ1NV5BMl5BanBnXkFtZTcwNDc3MzM5OQ@@._V1_SX300.jpg",
+      "summary": "When Keller Dover's daughter and her friend go missing, he takes matters into his own hands as the police pursue multiple leads and the pressure mounts."
+    },
+    {
+      "title": "Arrival",
+      "year": 2016,
+      "runtime": 116,
+      "director": "Denis Villeneuve",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMTExMzU0ODcxNDheQTJeQWpwZ15BbWU4MDQxNjA5MDcx._V1_SX300.jpg",
+      "summary": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world."
+    }
+  ],
+  "scifi-fantasy": [
+    {
+      "title": "The Matrix",
+      "year": 1999,
+      "runtime": 136,
+      "director": "Lana Wachowski, Lilly Wachowski",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+      "summary": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers."
+    },
+    {
+      "title": "Blade Runner 2049",
+      "year": 2017,
+      "runtime": 164,
+      "director": "Denis Villeneuve",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_SX300.jpg",
+      "summary": "Young Blade Runner K's discovery of a long-buried secret leads him to track down former Blade Runner Rick Deckard, who's been missing for thirty years."
+    },
+    {
+      "title": "Interstellar",
+      "year": 2014,
+      "runtime": 169,
+      "director": "Christopher Nolan",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+      "summary": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
+    },
+    {
+      "title": "Avatar",
+      "year": 2009,
+      "runtime": 162,
+      "director": "James Cameron",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg",
+      "summary": "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home."
+    },
+    {
+      "title": "Guardians of the Galaxy",
+      "year": 2014,
+      "runtime": 121,
+      "director": "James Gunn",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMTAwMjU5OTgxNjZeQTJeQWpwZ15BbWU4MDUxNDYxODEx._V1_SX300.jpg",
+      "summary": "A group of intergalactic criminals must pull together to stop a fanatical warrior with plans to purge the universe."
+    },
+    {
+      "title": "Star Wars: Episode IV - A New Hope",
+      "year": 1977,
+      "runtime": 121,
+      "director": "George Lucas",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "summary": "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader."
+    }
+  ],
+  "western": [
+    {
+      "title": "Django Unchained",
+      "year": 2012,
+      "runtime": 165,
+      "director": "Quentin Tarantino",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1_SX300.jpg",
+      "summary": "With the help of a German bounty hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner."
+    },
+    {
+      "title": "The Good, the Bad and the Ugly",
+      "year": 1966,
+      "runtime": 161,
+      "director": "Sergio Leone",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BNjJlYmNkZGItM2NhYy00MjlmLTk5NmQtNjg1NmM2ODU4OTMwXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg",
+      "summary": "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery."
+    },
+    {
+      "title": "No Country for Old Men",
+      "year": 2007,
+      "runtime": 122,
+      "director": "Ethan Coen, Joel Coen",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjA5Njk3MjM4OV5BMl5BanBnXkFtZTcwMTc5MTE1MQ@@._V1_SX300.jpg",
+      "summary": "Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and more than two million dollars in cash near the Rio Grande."
+    },
+    {
+      "title": "Unforgiven",
+      "year": 1992,
+      "runtime": 130,
+      "director": "Clint Eastwood",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BODM3YWY4NmQtN2Y3Ni00OTg0LWFhZGQtZWE3ZWY4MTJlOWU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+      "summary": "Retired Old West gunslinger William Munny reluctantly takes on one last job, with the help of his old partner Ned Logan and a young man, the \"Schofield Kid.\""
+    },
+    {
+      "title": "True Grit",
+      "year": 2010,
+      "runtime": 110,
+      "director": "Ethan Coen, Joel Coen",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjgwNjM4ODg3Nl5BMl5BanBnXkFtZTcwMjgwNjE5NA@@._V1_SX300.jpg",
+      "summary": "A stubborn teenager enlists the help of a tough U.S. Marshal to track down her father's murderer."
+    },
+    {
+      "title": "The Hateful Eight",
+      "year": 2015,
+      "runtime": 168,
+      "director": "Quentin Tarantino",
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjA1MTc1NTg5NV5BMl5BanBnXkFtZTgwOTM2MDEzNzE@._V1_SX300.jpg",
+      "summary": "In the dead of a Wyoming winter, a bounty hunter and his prisoner find shelter in a cabin currently inhabited by a collection of nefarious characters."
+    }
+  ]
+}

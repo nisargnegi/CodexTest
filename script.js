@@ -8,8 +8,7 @@ const genrePicker = document.getElementById("genre-picker");
 const refreshButton = document.getElementById("refresh-button");
 
 const SUGGESTION_COUNT = 6;
-const MOVIE_API_BASE = "https://api.sampleapis.com/movies";
-const IMAGE_PROXY_PREFIX = "https://images.weserv.nl/?url=";
+const MOVIE_API_BASE = "movies.json";
 
 const MOVIE_GENRES = [
   {
@@ -154,30 +153,12 @@ const GAME_LIBRARY = [
 let currentMode = null;
 let activeGenreId = MOVIE_GENRES[0].id;
 
-function sanitizePosterUrl(rawUrl) {
-  if (typeof rawUrl !== "string") return null;
-
-  let url = rawUrl.trim();
-
-  if (!url || url === "N/A") return null;
-
-  if (url.startsWith("//")) {
-    return `https:${url}`;
-  }
-
-  if (url.startsWith("http://")) {
-    const withoutProtocol = url.slice("http://".length);
-    return `${IMAGE_PROXY_PREFIX}${encodeURIComponent(withoutProtocol)}`;
-  }
-
-  return url;
-}
-
 function getPosterUrl(item) {
   const candidates = [item?.posterURL, item?.posterUrl, item?.poster];
   for (const candidate of candidates) {
-    const sanitized = sanitizePosterUrl(candidate);
-    if (sanitized) return sanitized;
+    if (typeof candidate === "string" && candidate.trim()) {
+        return candidate.trim();
+    }
   }
   return null;
 }
@@ -255,14 +236,16 @@ async function loadMovieSuggestions() {
   refreshButton.textContent = "Loading…";
 
   try {
-    const response = await fetch(`${MOVIE_API_BASE}/${genre.id}`);
+    const response = await fetch(MOVIE_API_BASE);
 
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`);
     }
 
-    const data = await response.json();
-    const cleaned = data.filter((item) => item?.title && getPosterUrl(item));
+    const allMovies = await response.json();
+    const genreMovies = allMovies[genre.id] || [];
+
+    const cleaned = genreMovies.filter((item) => item?.title && getPosterUrl(item));
 
     const selection = pickRandomItems(cleaned, SUGGESTION_COUNT);
 
@@ -326,6 +309,14 @@ async function loadMovieSuggestions() {
       summary.textContent = summaryText;
 
       body.appendChild(summary);
+
+      const trailerLink = document.createElement("a");
+      trailerLink.className = "suggestion-card__trailer";
+      trailerLink.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(item.title + " trailer")}`;
+      trailerLink.target = "_blank";
+      trailerLink.rel = "noopener noreferrer";
+      trailerLink.textContent = "▶ Watch Trailer";
+      body.appendChild(trailerLink);
 
       card.appendChild(media);
       card.appendChild(body);

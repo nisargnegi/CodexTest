@@ -296,6 +296,27 @@ main {
   overflow: hidden;
 }
 
+.suggestion-card__trailer {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  align-self: start;
+  justify-self: start;
+}
+
+.suggestion-card__trailer:hover,
+.suggestion-card__trailer:focus-visible {
+  background-color: var(--accent-dark);
+  transform: translateY(-2px);
+}
+
 .suggestions__empty,
 .suggestions__error {
   grid-column: 1 / -1;
