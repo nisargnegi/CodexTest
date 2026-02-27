@@ -87,66 +87,66 @@ const GAME_LIBRARY = [
   {
     title: "It Takes Two",
     summary:
-      "Swap between wild co-op mechanics as we guide Cody and May through a heartfelt, imaginative adventure.",
+      "The ultimate couple's adventure. We'll work together through every puzzle and laugh at the chaos.",
     image:
       "https://images.igdb.com/igdb/image/upload/t_cover_big/co2l2x.jpg",
-    note: "Cross-play via EA App – invite directly from the in-game friends list.",
+    note: "Best played with voice chat on!",
   },
   {
-    title: "Deep Rock Galactic",
+    title: "Stardew Valley",
     summary:
-      "Dwarf squad shenanigans, procedurally generated caves, and teamwork that keeps us laughing the whole dig.",
+      "Let's build a farm, raise some chickens, and live a peaceful virtual life together.",
     image:
-      "https://images.igdb.com/igdb/image/upload/t_cover_big/co2e5c.jpg",
-    note: "Cross-play between Xbox and Microsoft Store PC editions – host from either side.",
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co670h.jpg",
+    note: "Relaxing vibes guaranteed.",
   },
   {
     title: "Sea of Thieves",
     summary:
-      "Sail, sing, and swashbuckle as a pirate duo chasing tall tales, treasure, and cozy sunsets.",
+      "Just you, me, and the open sea. We can hunt for treasure or just sail into the sunset.",
     image:
       "https://images.igdb.com/igdb/image/upload/t_cover_big/co1s5y.jpg",
-    note: "Full cross-play – crew up by sharing an invite code or Xbox gamertag.",
+    note: "Prepare for pirate shenanigans!",
   },
   {
-    title: "Forza Horizon 5",
+    title: "Unravel Two",
     summary:
-      "Road-trip across Mexico with convoys, expeditions, and photo ops to swap in chat afterwards.",
+      "A beautiful puzzle platformer where we're literally tied together. Symbolism much?",
     image:
-      "https://images.igdb.com/igdb/image/upload/t_cover_big/co3w7z.jpg",
-    note: "Cross-play through Xbox Live – jump into each other’s convoy with a single invite.",
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co1x76.jpg",
+    note: "Requires teamwork and patience.",
   },
   {
-    title: "Halo Infinite",
+    title: "Portal 2",
     summary:
-      "Tactical arena bouts and sweeping co-op missions so Team Aloo & Saanu can flex heroic teamwork.",
+      "For when we want to feel smart (or confused) together. Science has never been this romantic.",
     image:
-      "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p7p.jpg",
-    note: "Cross-play matchmaking – party up from the social menu and head straight into action.",
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co1x7d.jpg",
+    note: "High fives after every puzzle.",
   },
   {
-    title: "Minecraft Dungeons",
+    title: "Minecraft",
     summary:
-      "Button-mashing dungeon crawling with cute loot and plenty of moments to revive each other.",
+      "We can build our dream house, go on adventures, or just tend to our garden.",
     image:
-      "https://images.igdb.com/igdb/image/upload/t_cover_big/co2bqz.jpg",
-    note: "Cross-play enabled – use Microsoft accounts to invite across PC and Xbox.",
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co28f8.jpg",
+    note: "Creative mode or Survival, you pick.",
   },
   {
     title: "Overcooked! 2",
     summary:
-      "Chaotic kitchen co-op that lets us yell playful instructions while serving up adorable dishes.",
+      "Chaotic kitchen co-op. A true test of our communication skills (and patience!).",
     image:
       "https://images.igdb.com/igdb/image/upload/t_cover_big/co1v0f.jpg",
-    note: "Enable cross-platform play in-game to cook together from PC and Xbox.",
+    note: "Try not to burn the kitchen down!",
   },
   {
-    title: "Splitgate",
+    title: "Haven",
     summary:
-      "Portal-flinging arena matches where our quick comms and clever plays shine brightest.",
+      "A RPG about everyday love, rebelling against the rules, and staying together.",
     image:
-      "https://images.igdb.com/igdb/image/upload/t_cover_big/co22k1.jpg",
-    note: "Cross-play parties – link up via invite code or friends list before hopping into matches.",
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/co2mvt.jpg",
+    note: "A story made for two.",
   },
 ];
 

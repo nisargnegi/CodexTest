@@ -54,6 +54,9 @@ GitHub Pages will automatically redeploy every time you push an update, making i
 
 > **Tip for seeing new changes immediately:** Browsers can aggressively cache `styles.css` and `script.js`. Any time you push larger updates, bump the version query in `index.html` (for example, change `?v=10` to `?v=11`) so Pages serves the newest files without requiring visitors to hard-refresh.
 
+> **Why is the Save button disabled?**
+> If you see a message saying "Your GitHub Pages site is currently being built from the main branch" and the "Save" button is grayed out, **GitHub Pages is already active**. You don't need to click Save again. Instead, check the **Actions** tab in your repository to see the build progress.
+
 ### Other free static hosting options
 
 If you prefer a drag-and-drop flow, services like [Netlify Drop](https://app.netlify.com/drop) and [Vercel](https://vercel.com/) also host static sites for free:
